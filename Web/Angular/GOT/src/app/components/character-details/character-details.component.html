@@ -38,12 +38,12 @@
                                         selectedCharacter.gender : 'Unknown'}}</div>
                                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
                                         <label class="mx-2">Played By</label>
-                                        <div *ngIf="selectedCharacter.tvSeries[0]; else noSeries">
+                                        <div *ngIf="selectedCharacter.tvSeries[0]; else noActors">
                                             <ul>
                                                 <li *ngFor="let actor of selectedCharacter.playedBy">{{actor}}</li>
                                             </ul>
                                         </div>
-                                        <ng-template #noSeries>
+                                        <ng-template #noActors>
                                             <p>Actors unknown</p>
                                         </ng-template>
                                     </div>
