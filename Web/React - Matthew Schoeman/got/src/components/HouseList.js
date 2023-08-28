@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useHouseContext } from '../context/HouseContext';
 import { Link } from 'react-router-dom';
+import Pagination from './Pagination';
 
 function HouseList() {
-  const houses = useHouseContext();
+  const { houses, fetchHouses} = useHouseContext();
   const [searchName, setSearchName] = useState('');
   const [searchRegion, setSearchRegion] = useState('');
   const [searchWords, setSearchWords] = useState('');
@@ -53,6 +54,7 @@ function HouseList() {
 
   return (
     <div>
+      <Pagination componentName="house" />
       <h1>Game of Thrones Houses</h1>
       <nav>
         <label htmlFor="searchName"></label>

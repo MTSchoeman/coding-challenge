@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useBookContext } from '../context/BookContext';
 import { Link } from 'react-router-dom';
-
+import Pagination from './Pagination';
 function BookList() {
-  const books = useBookContext();
+  const { books, fetchBooks } = useBookContext();
   const [searchName, setSearchName] = useState('');
   const [fromReleaseDate, setFromReleaseDate] = useState('');
   const [toReleaseDate, setToReleaseDate] = useState('');
@@ -40,6 +40,7 @@ function BookList() {
 
   return (
     <div>
+      <Pagination componentName="book" />
       <h1>Game of Thrones Books</h1>
       <nav>
       <label htmlFor="searchName"></label>

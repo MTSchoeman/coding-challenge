@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import { Link } from 'react-router-dom';
-
+import Pagination from './Pagination';
 function CharacterList() {
-  const characters = useCharacterContext();
+  // const characters = useCharacterContext();
+  const { characters, fetchCharacters } = useCharacterContext();
   const [searchName, setSearchName] = useState('');
   const [searchCulture, setSearchCulture] = useState('');
   const [searchBorn, setSearchBorn] = useState('');
@@ -12,6 +13,9 @@ function CharacterList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
 
+  // useEffect(() => {
+  //   fetchCharacters(PageService.characterCurrentPage, PageService.pageSize);
+  // }, []);
   const handleSearch = async () => {
     setSearching(true);
 
@@ -48,6 +52,7 @@ function CharacterList() {
 
   return (
     <div>
+      <Pagination componentName="character" />
       <h1>Game of Thrones Characters</h1>
       <nav>
         <label htmlFor="searchName">Search by Name</label>
@@ -131,7 +136,8 @@ function CharacterList() {
               </Link>
             </li>
           ))
-        )}
+        )
+        }
       </ul>
     </div>
   );
