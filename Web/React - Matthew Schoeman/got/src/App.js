@@ -1,6 +1,5 @@
-// export default App;
 import React, { useEffect} from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import Navigation from './components/Navigation'; // Import the Navigation component
 import CharacterList from './components/CharacterList';
 import Character from './components/Character';
@@ -32,6 +31,7 @@ function App() {
             path="/books/:name"
             render={(props) => <House house={props.location.state.book} />}
           />
+          <Redirect from="/" to="/houses" />
         </Switch>
       </div>
     </Router>
