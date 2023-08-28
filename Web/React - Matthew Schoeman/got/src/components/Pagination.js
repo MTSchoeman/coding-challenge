@@ -75,9 +75,7 @@ function Pagination({ componentName }) {
                 <div className="d-flex justify-content-center">
                     <div className="row">
                         <div className="col-auto">
-                            {/* <input className="form-control" type="number" min="1" max="50"></input> */}
-                            <input className="form-control" type="number" min="1" max="50" value={pageSize} onChange={(e) => setPageSize(e.target.value)}
-                            />
+                            <input className="form-control" type="number" min="1" max="50" value={pageSize} onChange={(e) => setPageSize(e.target.value)} placeholder={PageService.pageSize}/>
                         </div>
                         <div className="col-auto">
                             <button className="btn btn-outline-light mx-2" onClick={FetchData}>Update Size</button>
