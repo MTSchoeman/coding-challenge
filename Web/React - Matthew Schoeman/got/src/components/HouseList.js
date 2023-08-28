@@ -23,7 +23,7 @@ function HouseList() {
       newSearchName = `House ${searchName.trim()}`
     }
     const apiUrl = `https://anapioficeandfire.com/api/houses?name=${newSearchName}&searchRegion=${searchRegion}&searchWords=${searchWords}&hasDiedOut=${hasDiedOut}&hasTitles=${hasTitles}&hasSeats=${hasSeats}&hasWords=${hasWords}&hasAncestralWeapons=${hasAncestralWeapons}`;
-    console.log(apiUrl);
+    
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();

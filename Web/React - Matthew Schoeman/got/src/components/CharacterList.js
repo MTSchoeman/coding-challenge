@@ -13,9 +13,6 @@ function CharacterList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
 
-  // useEffect(() => {
-  //   fetchCharacters(PageService.characterCurrentPage, PageService.pageSize);
-  // }, []);
   const handleSearch = async () => {
     setSearching(true);
 
@@ -24,7 +21,7 @@ function CharacterList() {
       newSearchBorn = `In ${searchBorn.trim()} AC`;
     }
     const apiUrl = `https://anapioficeandfire.com/api/characters?name=${searchName}&culture=${searchCulture}&born=${newSearchBorn}&gender=${gender}&isAlive=${isAlive}`;
-    console.log(apiUrl);
+
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();

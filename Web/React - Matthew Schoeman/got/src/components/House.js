@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 function House({ house, history }) {
-  console.log(house);
   const handleGoBack = () => {
     history.goBack();
   };

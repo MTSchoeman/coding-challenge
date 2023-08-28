@@ -3,7 +3,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 function Book({ book, history }) {
-  console.log(book);
+
   const handleGoBack = () => {
     history.goBack();
   };

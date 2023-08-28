@@ -13,10 +13,6 @@ function Pagination({ componentName }) {
 
     const FetchData = () => {
         PageService.UpdateData(fetchBooks, fetchCharacters, fetchHouses, pageSize)
-        // PageService.FetchData(pageSize);
-        // PageService.houseCurrentPage = 1;
-        // PageService.characterCurrentPage = 1;
-        // PageService.bookCurrentPage = 1;
     }
 
     const GetCurrentPage = () => {

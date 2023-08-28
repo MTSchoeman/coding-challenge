@@ -12,7 +12,6 @@ function BookList() {
 
   const handleSearch = async () => {
     setSearching(true);
-    console.log(fromReleaseDate)
     const apiUrl = `https://anapioficeandfire.com/api/books?name=${searchName}&fromReleaseDate=${fromReleaseDate}T00:00:00&toReleaseDate=${toReleaseDate}T00:00:00`;
 
     try {

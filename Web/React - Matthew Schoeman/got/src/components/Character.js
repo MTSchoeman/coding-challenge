@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 function Character({ character, history }) {
-  console.log(character);
   const handleGoBack = () => {
     history.goBack();
   };
