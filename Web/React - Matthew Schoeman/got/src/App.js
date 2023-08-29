@@ -19,7 +19,7 @@ function App() {
           <Route exact path="/houses" component={HouseList} />
           <Route
             path="/houses/:name"
-            render={(props) => <Book book={props.location.state.house} />}
+            render={(props) => <House house={props.location.state.house} />}
           />
           <Route exact path="/characters" component={CharacterList} />
           <Route
@@ -29,7 +29,7 @@ function App() {
           <Route exact path="/books" component={BookList} />
           <Route
             path="/books/:name"
-            render={(props) => <House house={props.location.state.book} />}
+            render={(props) => <Book book={props.location.state.book} />}
           />
           <Redirect from="/" to="/houses" />
         </Switch>
