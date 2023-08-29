@@ -1,6 +1,6 @@
-import React, { useEffect} from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
-import Navigation from './components/Navigation'; // Import the Navigation component
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import Navigation from './components/Navigation';
 import CharacterList from './components/CharacterList';
 import Character from './components/Character';
 import BookList from './components/BookList';
@@ -8,15 +8,26 @@ import Book from './components/Book';
 import HouseList from './components/HouseList';
 import House from './components/House';
 import { PageService } from './services/PageService';
-
+import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 function App() {
 
   PageService.FetchData(10);
   return (
+
     <Router>
       <div className="App">
+        <div class='light x1'></div>
+        <div class='light x2'></div>
+        <div class='light x3'></div>
+        <div class='light x4'></div>
+        <div class='light x5'></div>
+        <div class='light x6'></div>
+        <div class='light x7'></div>
+        <div class='light x8'></div>
+        <div class='light x9'></div>
         <Navigation />
         <Switch>
           <Route exact path="/houses" component={HouseList} />
