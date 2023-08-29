@@ -8,6 +8,9 @@ import Book from './components/Book';
 import HouseList from './components/HouseList';
 import House from './components/House';
 import { PageService } from './services/PageService';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 function App() {
 
   PageService.FetchData(10);

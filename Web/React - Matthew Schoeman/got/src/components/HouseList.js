@@ -53,8 +53,10 @@ function HouseList() {
   };
 
   return (
-    <div>
-      <Pagination componentName="house" />
+    <div className='container-fluid'>
+      <div id='sticky-container'>
+        <Pagination componentName="house" />
+      </div>
       <h1>Game of Thrones Houses</h1>
       <nav>
         <label htmlFor="searchName"></label>
@@ -133,35 +135,87 @@ function HouseList() {
           </button>
         </div>
       </nav>
-      <ul>
+      <div className="row">
         {searchResults.length > 0 ? (
-          searchResults.map((house) => (
-            <li key={house.url}>
-              <Link
+          searchResults.map((house, index) => (
+            <Link
                 to={{
                   pathname: `/houses/${house.name === '' ? 'Nameless' : house.name}`,
                   state: { house: house },
                 }}
+                key={index}
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
               >
-                {house.name === '' ? 'Nameless' : house.name}
-              </Link>
-            </li>
+            <div>
+              <div className="card">
+                <div class="card-header text-center">
+                    <h4 class="card-title">{house.name}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <h4>Region: </h4>
+                            <h6>{house.region ? house.region : 'Unknown'}</h6>
+                        </div>
+                        <div class="col-md-6">
+
+                            <h4>Words: </h4>
+                            <h6>{house.words ? house.words : 'Unknown'}</h6>
+                        </div>
+                        <hr />
+                        <div class="col-xs-12">
+
+                            <h4>Coat of Arms: </h4>
+                            <h6> {house.coatOfArms ? house.coatOfArms : 'Unknown'}</h6>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            </Link>
           ))
         ) : (
-          houses.map((house) => (
-            <li key={house.url}>
-              <Link
+          houses.map((house, index) => (
+            <Link
                 to={{
                   pathname: `/houses/${house.name === '' ? 'Nameless' : house.name}`,
                   state: { house: house },
                 }}
+                key={index}
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
               >
-                {house.name === '' ? 'Nameless' : house.name}
-              </Link>
-            </li>
+            <div>
+              <div className="card">
+                <div class="card-header text-center">
+                    <h4 class="card-title">{house.name}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <h4>Region: </h4>
+                            <h6>{house.region ? house.region : 'Unknown'}</h6>
+                        </div>
+                        <div class="col-md-6">
+
+                            <h4>Words: </h4>
+                            <h6>{house.words ? house.words : 'Unknown'}</h6>
+                        </div>
+                        <hr />
+                        <div class="col-xs-12">
+
+                            <h4>Coat of Arms: </h4>
+                            <h6> {house.coatOfArms ? house.coatOfArms : 'Unknown'}</h6>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            </Link>
           ))
         )}
-      </ul>
+      </div>
     </div>
   );
 }

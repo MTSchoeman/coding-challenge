@@ -38,11 +38,13 @@ function BookList() {
   }
 
   return (
-    <div>
-      <Pagination componentName="book" />
+    <div className='container-fluid'>
+      <div id='stick-container'>
+        <Pagination componentName="book" />
+      </div>
       <h1>Game of Thrones Books</h1>
       <nav>
-      <label htmlFor="searchName"></label>
+        <label htmlFor="searchName"></label>
         <input
           type="text"
           name="searchName"
@@ -80,62 +82,85 @@ function BookList() {
           Cancel
         </button>
       </nav>
-      <ul>
-      {searchResults.length > 0 ? (
-          searchResults.map((book) => (
-            <li key={book.url}>
-              <Link
-                to={{
-                  pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
-                  state: { book: book },
-                }}
-              >
-                {book.name === '' ? 'Nameless' : book.name}
-              </Link>
-            </li>
-          ))
-        ) : (
-          books.map((book) => (
-            <li key={book.url}>
-              <Link
-                to={{
-                  pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
-                  state: { book: book },
-                }}
-              >
-                {book.name === '' ? 'Nameless' : book.name}
-              </Link>
-            </li>
-          ))
-        )}
-        {/* {searchResults.length > 0 ? (
-          searchResults.map((book) => {
-            <li key={book.name}>
-              <Link to={{
+      <div className="row">
+        {searchResults.length > 0 ? (
+          searchResults.map((book, index) => (
+            <Link
+              to={{
                 pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
-                state: { book: book }
-              }}>
-                {book.name === '' ? 'Nameless' : book.name}
-              </Link>
-            </li>
-          })
-        ) : (
-          books.map((book) => {
-            <li key={book.name}>
-              <Link to={{
-                pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
-                state: { book: book }
-              }}>
-                {book.name === '' ? 'Nameless' : book.name}
-              </Link>
-            </li>
-          })
-        )}
+                state: { book: book },
+              }}
+              key={index}
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
+            >
+              <div>
+                <div className="card">
+                  <div className="card-header text-center">
+                    <h4 className="card-title">{book.name}</h4>
+                  </div>
+                  <div className="card-body">
+                    <div className="row">
+                      <div class="col-md-6">
+                        <h4>Title: </h4>
+                        <h6>{book.name ? book.name : 'Unknown'}</h6>
+                      </div>
+                      <div class="col-md-6">
 
-        {books.map(book => (
-          <li key={book.name}>{book.name}</li>
-        ))} */}
-      </ul>
+                        <h4>ISBN: </h4>
+                        <h6> {book.isbn ? book.isbn : 'Unknown'}</h6>
+                      </div>
+                      <hr />
+                      <div class="col-xs-12">
+
+                        <h4>Author: </h4>
+                        <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          books.map((book, index) => (
+            <Link
+              to={{
+                pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
+                state: { book: book },
+              }}
+              key={index}
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
+            >
+              <div>
+                <div className="card">
+                  <div className="card-header text-center">
+                    <h4 className="card-title">{book.name}</h4>
+                  </div>
+                  <div className="card-body">
+                    <div className="row">
+                      <div class="col-md-6">
+                        <h4>Title: </h4>
+                        <h6>{book.name ? book.name : 'Unknown'}</h6>
+                      </div>
+                      <div class="col-md-6">
+
+                        <h4>ISBN: </h4>
+                        <h6> {book.isbn ? book.isbn : 'Unknown'}</h6>
+                      </div>
+                      <hr />
+                      <div class="col-xs-12">
+
+                        <h4>Author: </h4>
+                        <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))
+        )}
+      </div>
     </div>
   );
 }

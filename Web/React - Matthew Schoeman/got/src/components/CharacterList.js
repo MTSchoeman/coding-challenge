@@ -17,7 +17,7 @@ function CharacterList() {
     setSearching(true);
 
     let newSearchBorn = ''
-    if(searchBorn !== ''){
+    if (searchBorn !== '') {
       newSearchBorn = `In ${searchBorn.trim()} AC`;
     }
     const apiUrl = `https://anapioficeandfire.com/api/characters?name=${searchName}&culture=${searchCulture}&born=${newSearchBorn}&gender=${gender}&isAlive=${isAlive}`;
@@ -25,9 +25,10 @@ function CharacterList() {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-      
+
       if (data.length > 0) {
         setSearchResults(data);
+        console.log(data);
       } else {
         setSearchResults([]);
       }
@@ -48,8 +49,10 @@ function CharacterList() {
   };
 
   return (
-    <div>
-      <Pagination componentName="character" />
+    <div className='container-fluid'>
+      <div id='sticky-container'>
+        <Pagination componentName="character" />
+      </div>
       <h1>Game of Thrones Characters</h1>
       <nav>
         <label htmlFor="searchName">Search by Name</label>
@@ -59,8 +62,8 @@ function CharacterList() {
           placeholder="Walder"
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
-        ></input> 
-        <br/>
+        ></input>
+        <br />
         <label htmlFor="searchCulture">Search by Culture</label>
         <input
           type="text"
@@ -71,7 +74,7 @@ function CharacterList() {
         ></input>
         <br />
         <label htmlFor="searchBorn">Search by Born</label>
-         <input
+        <input
           type="number"
           name="searchBorn"
           placeholder="283"
@@ -91,7 +94,7 @@ function CharacterList() {
             <option value="true">Alive</option>
             <option value="false">Dead</option>
           </select>
-          <br/>
+          <br />
           {searching ? (
             <button type="button" disabled>
               Searching...
@@ -106,36 +109,83 @@ function CharacterList() {
           </button>
         </div>
       </nav>
-      <ul>
+
+      <div className="row">
         {searchResults.length > 0 ? (
-          searchResults.map((character) => (
-            <li key={character.url}>
-              <Link
+          searchResults.map((character, index) => (
+            <Link
                 to={{
                   pathname: `/characters/${character.name === '' ? 'Nameless' : character.name}`,
                   state: { character: character },
                 }}
+                key={index}
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
               >
-                {character.name === '' ? 'Nameless' : character.name}
-              </Link>
-            </li>
+            <div>
+              <div className="card">
+                <div className="card-header text-center">
+                  <h4 className="card-title">{character.name ? character.name : 'Nameless'}</h4>
+                </div>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <h4>Gender:</h4>
+                      <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
+                    </div>
+                    <div className="col-md-6">
+                      <h4>Culture:</h4>
+                      <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
+                    </div>
+                    <hr />
+                    <div className="col-xs-12">
+                      <h4>Born:</h4>
+                      <h6>{character.born ? character.born : 'Date not specified'}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </Link>
           ))
         ) : (
-          characters.map((character) => (
-            <li key={character.url}>
-              <Link
+          characters.map((character, index) => (
+            <Link
                 to={{
                   pathname: `/characters/${character.name === '' ? 'Nameless' : character.name}`,
                   state: { character: character },
                 }}
+                key={index}
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
               >
-                {character.name === '' ? 'Nameless' : character.name}
-              </Link>
-            </li>
+            <div>
+              <div className="card">
+                <div className="card-header text-center">
+                  <h4 className="card-title">{character.name ? character.name : 'Nameless'}</h4>
+                </div>
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <h4>Gender:</h4>
+                      <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
+                    </div>
+                    <div className="col-md-6">
+                      <h4>Culture:</h4>
+                      <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
+                    </div>
+                    <hr />
+                    <div className="col-xs-12">
+                      <h4>Born:</h4>
+                      <h6>{character.born ? character.born : 'Date not specified'}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </Link>
           ))
-        )
-        }
-      </ul>
+        )}
+      </div>
+
     </div>
   );
 }
