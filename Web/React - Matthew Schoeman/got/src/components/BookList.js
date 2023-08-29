@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useBookContext } from '../context/BookContext';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
+
+import '../styles/BookList.css'
 function BookList() {
   const { books, fetchBooks } = useBookContext();
   const [searchName, setSearchName] = useState('');
@@ -39,7 +41,7 @@ function BookList() {
 
   return (
     <div className='container-fluid'>
-      <div id='stick-container'>
+      <div id='sticky-container'>
         <Pagination componentName="book" />
       </div>
       <h1>Game of Thrones Books</h1>
@@ -94,23 +96,23 @@ function BookList() {
               className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
             >
               <div>
-                <div className="card">
-                  <div className="card-header text-center">
-                    <h4 className="card-title">{book.name}</h4>
+                <div className="bookList card">
+                  <div className="bookList card-header text-center">
+                    <h4 className="bookList card-title">{book.name}</h4>
                   </div>
-                  <div className="card-body">
+                  <div className="bookList card-body">
                     <div className="row">
-                      <div class="col-md-6">
+                      <div className="col-md-6">
                         <h4>Title: </h4>
                         <h6>{book.name ? book.name : 'Unknown'}</h6>
                       </div>
-                      <div class="col-md-6">
+                      <div className="col-md-6">
 
                         <h4>ISBN: </h4>
                         <h6> {book.isbn ? book.isbn : 'Unknown'}</h6>
                       </div>
                       <hr />
-                      <div class="col-xs-12">
+                      <div className="col-xs-12">
 
                         <h4>Author: </h4>
                         <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>
@@ -132,23 +134,23 @@ function BookList() {
               className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
             >
               <div>
-                <div className="card">
-                  <div className="card-header text-center">
-                    <h4 className="card-title">{book.name}</h4>
+                <div className="bookList card">
+                  <div className="bookList card-header text-center">
+                    <h4 className="bookList card-title">{book.name}</h4>
                   </div>
-                  <div className="card-body">
+                  <div className="bookList card-body">
                     <div className="row">
-                      <div class="col-md-6">
+                      <div className="col-md-6">
                         <h4>Title: </h4>
                         <h6>{book.name ? book.name : 'Unknown'}</h6>
                       </div>
-                      <div class="col-md-6">
+                      <div className="col-md-6">
 
                         <h4>ISBN: </h4>
                         <h6> {book.isbn ? book.isbn : 'Unknown'}</h6>
                       </div>
                       <hr />
-                      <div class="col-xs-12">
+                      <div className="col-xs-12">
 
                         <h4>Author: </h4>
                         <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>

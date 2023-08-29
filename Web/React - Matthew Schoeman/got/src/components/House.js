@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import HouseSnip from './HouseSnip';
 import CharacterSnip from './CharacterSnip';
+
+import '../styles/House.css'
 function House({ house, history }) {
 
   const [heirFetch, setHeirFetch] = useState(null);
@@ -80,8 +82,8 @@ function House({ house, history }) {
       {house ? (
         <div className="row">
           <div className="col-12">
-            <div className="card">
-              <div className="card-header">
+            <div className="house card">
+              <div className="house card-header">
                 <div className="row">
                   <div className="col-2">
                     <button className="btn btn-outline-light my-2" onClick={handleGoBack}>
@@ -89,14 +91,14 @@ function House({ house, history }) {
                     </button>
                   </div>
                   <div className="col-8 text-center">
-                    <h1 className="card-title">{house.name || 'Nameless'}</h1>
+                    <h1 className="house card-title">{house.name || 'Nameless'}</h1>
                   </div>
                   <div className="col-2"></div>
                 </div>
               </div>
-              <div className="card-body">
+              <div className="house card-body">
                 <div className="row">
-                  <div className="col-sm-12 col-md-12 col-lg-12 mb-4" id="left-column">
+                  <div className="col-sm-12 col-md-12 col-lg-12 mb-4" id="house-left-column">
                     <div className="container">
                       <div className="row px-2">
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
@@ -173,11 +175,11 @@ function House({ house, history }) {
                       </div>
                       <div className="col-12">
                         <div className="my-2">
-                          <div className="card-header">
-                            <h5 className="card-title text-center">Sworn Members</h5>
+                          <div className="house card-header">
+                            <h5 className="house card-title text-center">Sworn Members</h5>
                           </div>
                           {swornMembersFetch ? (
-                            <div className="card-body">
+                            <div className="house card-body">
                               <div className="container">
                                 <div className="row">
                                   {swornMembersFetch.map((member, index) => (

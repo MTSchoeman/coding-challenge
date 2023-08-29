@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useCharacterContext } from '../context/CharacterContext';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
+import '../styles/CharacterList.css'
 function CharacterList() {
-  // const characters = useCharacterContext();
   const { characters, fetchCharacters } = useCharacterContext();
   const [searchName, setSearchName] = useState('');
   const [searchCulture, setSearchCulture] = useState('');
@@ -122,11 +122,11 @@ function CharacterList() {
               className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
               >
             <div>
-              <div className="card">
-                <div className="card-header text-center">
-                  <h4 className="card-title">{character.name ? character.name : 'Nameless'}</h4>
+              <div className="characterList card">
+                <div className="characterList card-header text-center">
+                  <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
                 </div>
-                <div className="card-body">
+                <div className="characterList card-body">
                   <div className="row">
                     <div className="col-md-6">
                       <h4>Gender:</h4>
@@ -158,11 +158,11 @@ function CharacterList() {
               className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
               >
             <div>
-              <div className="card">
-                <div className="card-header text-center">
-                  <h4 className="card-title">{character.name ? character.name : 'Nameless'}</h4>
+              <div className="characterList card">
+                <div className="characterList card-header text-center">
+                  <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
                 </div>
-                <div className="card-body">
+                <div className="characterList card-body">
                   <div className="row">
                     <div className="col-md-6">
                       <h4>Gender:</h4>

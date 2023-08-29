@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import CharacterSnip from './CharacterSnip';
+import '../styles/Book.css'
 function Book({ book, history }) {
 
   const [charactersFetch, setCharactersFetch] = useState(null);
@@ -60,21 +61,21 @@ function Book({ book, history }) {
       <div className='row'>
         {book ? (
           <div className='col-12'>
-            <div className='card'>
-              <div className='card=header'>
+            <div className='book card'>
+              <div className='book card-header'>
                 <div className='row'>
                   <div className='col-2'>
                     <button className='btn btn-outline-light my-2' onClick={handleGoBack}>Go Back</button>
                   </div>
                   <div className='col-8 text-center'>
-                    <h1 classname="card-title">{book.name ?? 'Nameless'} </h1>
+                    <h1 classname="book card-title">{book.name ?? 'Nameless'} </h1>
                   </div>
                   <div className='col-2'></div>
                 </div>
               </div>
-              <div className='card-body'>
+              <div className='book card-body'>
                 <div className='row'>
-                  <div className="col-sm-12 col-md-12 col-lg-12" id="left-column">
+                  <div className="col-sm-12 col-md-12 col-lg-12" id="book-left-column">
                     <div className="container">
                       <div className="row px-2">
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
@@ -138,11 +139,11 @@ function Book({ book, history }) {
                   <hr />
                   <div className="col-12">
                     <div className="my-2">
-                      <div className="card-header">
+                      <div className="book card-header">
                         <h5>Characters</h5>
                       </div>
                       {charactersFetch ? (
-                        <div className="card-body">
+                        <div className="book card-body">
                           <div className="container">
                             <div className="row">
                               {charactersFetch.map((character, index) => (

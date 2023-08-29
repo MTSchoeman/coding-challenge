@@ -4,6 +4,7 @@ import axios from 'axios';
 import CharacterSnip from './CharacterSnip';
 import HouseSnip from './HouseSnip';
 import BookSnip from './BookSnip';
+import '../styles/Character.css'
 function Character({ character, history }) {
 
   const [fatherFetch, setFatherFetch] = useState(null);
@@ -90,21 +91,21 @@ function Character({ character, history }) {
       <div className="row">
         {character ?
           <div className='col-12'>
-            <div className='card'>
-              <div className='card-header'>
+            <div className='character card'>
+              <div className='character card-header'>
                 <div className='row'>
                   <div className='col-2'>
                     <button className="btn btn-outline-light my-2" onClick={handleGoBack}>Go Back</button>
                   </div>
                   <div className='col-8 text-center'>
-                    <h1 className='card-title'>{character.name ? character.name : 'Nameless'}</h1>
+                    <h1 className='character card-title'>{character.name ? character.name : 'Nameless'}</h1>
                   </div>
                   <div className='col-2'></div>
                 </div>
               </div>
-              <div className='card-body'>
+              <div className='character card-body'>
                 <div className='row'>
-                  <div className="col-sm-12 col-md-12 col-lg-12" id="left-column">
+                  <div className="col-sm-12 col-md-12 col-lg-12" id="character-left-column">
                     <div className="container">
                       <div className="row px-2">
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
@@ -195,11 +196,11 @@ function Character({ character, history }) {
                       <hr />
                       <div className="col-xs-12">
                         <div className="my-2">
-                          <div className="card-header">
-                            <h4 className="card-title text-center">Books</h4>
+                          <div className="character card-header">
+                            <h4 className="character card-title text-center">Books</h4>
                           </div>
                           {booksFetch ? (
-                            <div className="card-body">
+                            <div className="character card-body">
                               <div className="container">
                                 <div className="row">
                                   {booksFetch.map((book, index) => (
