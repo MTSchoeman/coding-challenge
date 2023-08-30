@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 import '../styles/HouseList.css'
 import HouseListCard from './HouseListCard';
 function HouseList() {
-  const { houses, fetchHouses } = useHouseContext();
+  const { houses, fetchHouses, houseListLoading } = useHouseContext();
   const [searchName, setSearchName] = useState('');
   const [searchRegion, setSearchRegion] = useState('');
   const [searchWords, setSearchWords] = useState('');
@@ -17,6 +17,7 @@ function HouseList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [houseListPageSize, setHouseListPageSize] = useState(10);
+  
   const handleSearch = async () => {
     setSearching(true);
     let newSearchName = '';
@@ -142,7 +143,13 @@ function HouseList() {
         </nav>
       </div>
       <div className="row">
-        {searchResults.length > 0 ? (
+        { houseListLoading ? (
+          <div className='col-12 text-center mt-4'>
+          <div className="spinner-border text-light" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        ):searchResults.length > 0 ? (
           searchResults.map((house, index) => (
             <Link
               to={{

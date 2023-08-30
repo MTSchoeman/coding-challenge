@@ -8,6 +8,7 @@ export const useHouseContext = () => useContext(HouseContext);
 
 export const HouseProvider = ({ children }) => {
   const [houses, setHouses] = useState([]);
+  const [houseListLoading, setCharacterListLoading] = useState(true);
 
   const fetchHouses = async (page, pageSize) => {
     try {
@@ -15,14 +16,17 @@ export const HouseProvider = ({ children }) => {
       setHouses(response.data);
     } catch (error) {
       console.error('Error fetching houses:', error);
+    } finally {
+      setCharacterListLoading(false); 
     }
   };
 
   useEffect(() => {
     fetchHouses(PageService.characterCurrentPage, PageService.pageSize);
   }, [PageService.characterCurrentPage, PageService.pageSize]);
+  
   return (
-    <HouseContext.Provider value={{ houses, fetchHouses }}>
+    <HouseContext.Provider value={{ houses, fetchHouses, houseListLoading }}>
       {children}
     </HouseContext.Provider>
   );

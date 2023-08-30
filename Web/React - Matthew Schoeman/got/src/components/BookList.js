@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 import BookListCard from './BookListCard';
 import '../styles/BookList.css'
 function BookList() {
-  const { books, fetchBooks } = useBookContext();
+  const { books, fetchBooks, bookListLoading } = useBookContext();
   const [searchName, setSearchName] = useState('');
   const [fromReleaseDate, setFromReleaseDate] = useState('');
   const [toReleaseDate, setToReleaseDate] = useState('');
@@ -90,7 +90,13 @@ function BookList() {
       </div>
 
       <div className="row">
-        {searchResults.length > 0 ? (
+        {  bookListLoading?(
+          <div className='col-12 text-center mt-4'>
+          <div className="spinner-border text-light" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        ):searchResults.length > 0 ? (
           searchResults.map((book, index) => (
             <Link
               to={{

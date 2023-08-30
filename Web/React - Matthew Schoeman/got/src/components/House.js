@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import HouseSnip from './HouseSnip';
@@ -14,28 +14,71 @@ function House({ house, history }) {
   const [swornMembersFetch, setSwornMembersFetch] = useState(null);
   const [cadetBranchesFetch, setCadetBranchesFetch] = useState(null);
 
+  const [isLoadingCurrentLord, setIsLoadingCurrentLord] = useState(true);
+  const [isLoadingFounder, setIsLoadingFounder] = useState(true);
+  const [isLoadingHeir, setIsLoadingHeir] = useState(true);
+  const [isLoadingOverLord, setIsLoadingOverLord] = useState(true);
+  const [isLoadingSwornMembers, setIsLoadingSwornMembers] = useState(true);
+  const [isLoadingCadetBranches, setIsLoadingCadetBranches] = useState(true);
   useEffect(() => {
     async function fetchData() {
       try {
         if (house.currentLord !== '') {
-          const response = await axios.get(house.currentLord);
-          setCurrentLordFetch(response.data);
+          try {
+            const response = await axios.get(house.currentLord);
+            setCurrentLordFetch(response.data);
+            setIsLoadingCurrentLord(false);
+          } catch (error) {
+            setIsLoadingCurrentLord(false);
+            console.error(`Error fetching data from ${house.currentLord}: ${error.message}`);
+          }
         }
+        else {
+          setIsLoadingCurrentLord(false);
+        }
+
         if (house.founder !== '') {
-          const response = await axios.get(house.founder);
-          setFounderFetch(response.data);
+          try {
+
+            const response = await axios.get(house.founder);
+            setFounderFetch(response.data);
+            setIsLoadingFounder(false);
+          } catch (error) {
+            console.error(`Error fetching data from ${house.founder}: ${error.message}`);
+            setIsLoadingFounder(false);
+          }
         }
-  
+        else {
+          setIsLoadingFounder(false);
+        }
+
         if (house.heir !== '') {
-          const response = await axios.get(house.heir);
-          setHeirFetch(response.data);
+          try {
+            const response = await axios.get(house.heir);
+            setHeirFetch(response.data);
+            setIsLoadingHeir(false);
+          } catch (error) {
+            console.error(`Error fetching data from ${house.heir}: ${error.message}`);
+            setIsLoadingHeir(false);
+          }
         }
-        
+        else {
+          setIsLoadingHeir(false);
+        }
+
         if (house.overlord !== '') {
-          const response = await axios.get(house.overlord);
-          setOverlordFetch(response.data);
+          try {
+            const response = await axios.get(house.overlord);
+            setOverlordFetch(response.data);
+            setIsLoadingOverLord(false);
+          } catch (error) {
+            console.error(`Error fetching data from ${house.overlord}: ${error.message}`);
+            setIsLoadingOverLord(false);
+          }
+        } else {
+          setIsLoadingOverLord(false);
         }
-  
+
         if (house.swornMembers.length > 0) {
           const swornMembersPromises = house.swornMembers.map(async url => {
             try {
@@ -46,11 +89,14 @@ function House({ house, history }) {
               return null;
             }
           });
-  
           let membersArray = await Promise.all(swornMembersPromises);
           setSwornMembersFetch(membersArray);
+          setIsLoadingSwornMembers(false);
         }
-  
+        else {
+          setIsLoadingSwornMembers(false);
+        }
+
         if (house.cadetBranches.length > 0) {
           const cadetBranchesPromises = house.cadetBranches.map(async url => {
             try {
@@ -61,9 +107,13 @@ function House({ house, history }) {
               return null;
             }
           });
-  
+
           let cadetArray = await Promise.all(cadetBranchesPromises);
           setCadetBranchesFetch(cadetArray);
+          setIsLoadingCadetBranches(false);
+        }
+        else {
+          setIsLoadingCadetBranches(false);
         }
       } catch (error) {
         console.error('An error occurred:', error.message);
@@ -71,7 +121,7 @@ function House({ house, history }) {
     }
 
     fetchData();
-  }, [house]); 
+  }, [house]);
 
   const handleGoBack = () => {
     history.goBack();
@@ -105,13 +155,68 @@ function House({ house, history }) {
                           <label>Region:</label> <br />
                           <h6>{house.region || 'Unknown'}</h6>
                         </div>
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2"><label>Heir: </label> <br /> <CharacterSnip character={heirFetch} /> </div>
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2"><label>Founder: </label> <br /> <CharacterSnip character={founderFetch} /> </div>
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2"><label>Current Lord: </label> <br /> <CharacterSnip character={currentLordFetch} /> </div>
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2"><label>Overlord: </label> <br /> <HouseSnip house={overlordFetch} /> </div>
-                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2"><label>Founded: </label> <br /> {house.founded ?
-                          house.founded :
-                          'Unknown'}</div>
+                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
+                          <label>Heir: </label>
+                          {isLoadingHeir ? (
+                            <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <br /> <CharacterSnip character={heirFetch} />
+                            </>
+                          )}
+                        </div>
+                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
+                          <label>Founder: </label>
+                          {isLoadingFounder ? (
+                            <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+
+                              <br /> <CharacterSnip character={founderFetch} />
+                            </>
+                          )};
+                        </div>
+                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
+                          <label>Current Lord: </label>
+                          {isLoadingCurrentLord ? (
+                            <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <br /> <CharacterSnip character={currentLordFetch} />
+                            </>
+                          )};
+                        </div>
+                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
+                          <label>Overlord: </label>
+                          {isLoadingOverLord ? (
+                            <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <br /> <HouseSnip house={overlordFetch} />
+                            </>
+                          )}
+                        </div>
+                        <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
+                          <label>Founded: </label>
+                          <br /> {house.founded ?
+                            house.founded :
+                            'Unknown'}</div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2"><label>Died Out: </label> <br /> {house.diedOut ?
                           house.diedOut :
                           'Unknown'}</div>
@@ -139,10 +244,16 @@ function House({ house, history }) {
                       </div>
                       <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <h4 className="text-center">Cadet Branches</h4>
-                        {cadetBranchesFetch ? (
+                        { isLoadingCadetBranches ? (
+                          <div className='col-12 text-center mt-4'>
+                          <div className="spinner-border text-light" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                        ): cadetBranchesFetch ? (
                           <ul>
                             {cadetBranchesFetch.map((branch, index) => (
-                              <li key={index}> <HouseSnip house={branch}/> </li>
+                              <li key={index}> <HouseSnip house={branch} /> </li>
                             ))}
                           </ul>
                         ) : (
@@ -178,13 +289,19 @@ function House({ house, history }) {
                           <div className="house card-header">
                             <h5 className="house card-title text-center">Sworn Members</h5>
                           </div>
-                          {swornMembersFetch ? (
+                          {  isLoadingSwornMembers ? (
+                              <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) :swornMembersFetch ? (
                             <div className="house card-body">
                               <div className="container">
                                 <div className="row">
                                   {swornMembersFetch.map((member, index) => (
                                     <div key={index} className="col-xs-12 col-sm-12 col-md-4">
-                                      <CharacterSnip character={member}/>
+                                      <CharacterSnip character={member} />
                                     </div>
                                   ))}
                                 </div>

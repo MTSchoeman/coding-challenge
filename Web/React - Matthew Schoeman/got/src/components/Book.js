@@ -7,7 +7,8 @@ function Book({ book, history }) {
 
   const [charactersFetch, setCharactersFetch] = useState(null);
   const [povCharactersFetch, setPovCharactersFetch] = useState(null);
-
+  const [isLoadingCharacters, setIsLoadingCharacters] = useState(true);
+  const [isLoadingPOVCharacters, setIsLoadingPOVCharacters] = useState(true);
   const handleGoBack = () => {
     history.goBack();
   };
@@ -28,6 +29,10 @@ function Book({ book, history }) {
           })
           let charactersArray = await Promise.all(charactersPromises);
           setCharactersFetch(charactersArray);
+          setIsLoadingCharacters(false);
+        }
+        else{
+          setIsLoadingCharacters(false);
         }
 
         if (book.povCharacters.length > 0) {
@@ -43,6 +48,10 @@ function Book({ book, history }) {
 
           let povCharactersArray = await Promise.all(povCharactersPromises);
           setPovCharactersFetch(povCharactersArray);
+          setIsLoadingPOVCharacters(false);
+        }
+        else{
+          setIsLoadingPOVCharacters(false);
         }
       } catch (error) {
         console.error('An error occurred:', error.message);
@@ -121,7 +130,13 @@ function Book({ book, history }) {
                   <div className='col-sm-12'>
                     <div className='row my-2'>
                       <h5>POV Characters</h5>
-                      {povCharactersFetch ? (
+                      { isLoadingPOVCharacters ? (
+                        <div className='col-12 text-center mt-4'>
+                        <div class="spinner-border text-light" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                      ) : povCharactersFetch ? (
                         <div className="container">
                           <div className="row">
                             {povCharactersFetch.map((character, index) => (
@@ -142,11 +157,17 @@ function Book({ book, history }) {
                       <div className="book card-header">
                         <h5>Characters</h5>
                       </div>
-                      {charactersFetch ? (
+                      {isLoadingCharacters ? (
+                        <div className='col-12 text-center mt-4'>
+                          <div class="spinner-border text-light" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      ) : charactersFetch ? (
                         <div className="book card-body">
                           <div className="container">
                             <div className="row">
-                              {charactersFetch.map((character, index) => (
+                              {charactersFetch?.map((character, index) => (
                                 <div key={index} className="col-xs-12 col-sm-12 col-md-4">
                                   <CharacterSnip character={character} />
                                 </div>

@@ -6,7 +6,7 @@ import '../styles/CharacterList.css'
 
 import CharacterListCard from './CharacterListCard';
 function CharacterList() {
-  const { characters, fetchCharacters } = useCharacterContext();
+  const { characters, fetchCharacters, characterListLoading } = useCharacterContext();
   const [searchName, setSearchName] = useState('');
   const [searchCulture, setSearchCulture] = useState('');
   const [searchBorn, setSearchBorn] = useState('');
@@ -128,7 +128,13 @@ function CharacterList() {
         </nav>
       </div>
       <div className="row">
-        {searchResults.length > 0 ? (
+        {characterListLoading ?  (
+          <div className='col-12 text-center mt-4'>
+          <div className="spinner-border text-light" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        ):searchResults.length > 0 ? (
           searchResults.map((character, index) => (
             <Link
               to={{

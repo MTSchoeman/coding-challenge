@@ -8,13 +8,15 @@ export const useBookContext = () => useContext(BookContext);
 
 export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
-
+  const [bookListLoading, setBookListLoading] = useState(true);
   const fetchBooks = async (page, pageSize) => {
     try {
       const response = await axios.get(`https://www.anapioficeandfire.com/api/books?page=${page}&pageSize=${pageSize}`);
       setBooks(response.data);
     } catch (error) {
       console.error('Error fetching books:', error);
+    }finally{
+      setBookListLoading(false);
     }
   };
 
@@ -22,7 +24,7 @@ export const BookProvider = ({ children }) => {
     fetchBooks(PageService.characterCurrentPage, PageService.pageSize);
   }, [PageService.characterCurrentPage, PageService.pageSize]);
   return (
-    <BookContext.Provider value={{ books, fetchBooks }}>
+    <BookContext.Provider value={{ books, fetchBooks, bookListLoading }}>
       {children}
     </BookContext.Provider>
   );

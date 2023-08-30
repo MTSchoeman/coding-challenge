@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import CharacterSnip from './CharacterSnip';
@@ -14,6 +14,13 @@ function Character({ character, history }) {
   const [booksFetch, setBooksFetch] = useState(null);
   const [povBooksFetch, setPovPovBooksFetch] = useState(null);
 
+  const [isLoadingFather, setIsLoadingFather] = useState(true);
+  const [isLoadingMother, setIsLoadingMother] = useState(true);
+  const [isLoadingSpouse, setIsLoadingSpouse] = useState(true);
+  const [isLoadingAllegienaces, setIsLoadingAllegiances] = useState(true);
+  const [isLoadingBooks, setIsLoadingBooks] = useState(true);
+  const [isLoadingPovBooks, setIsLoadingPovBooks] = useState(true);
+ 
   const handleGoBack = () => {
     history.goBack();
   };
@@ -22,19 +29,41 @@ function Character({ character, history }) {
     async function fetchData() {
       try {
         if (character.father !== '') {
-          const response = await axios.get(character.father);
-          setFatherFetch(response.data);
+          try {
+            const response = await axios.get(character.father);
+            setFatherFetch(response.data);
+            setIsLoadingFather(false);
+          } catch (error) {
+            console.error(`Error fetching data from ${character.father}: ${error.message}`);
+            setIsLoadingFather(false);
+          }
+        }else{
+          setIsLoadingFather(false);
         }
+
         if (character.mother !== '') {
-          const response = await axios.get(character.mother);
-          setmotherFetch(response.data);
+          try{
+            const response = await axios.get(character.mother);
+            setmotherFetch(response.data);
+            setIsLoadingMother(false);
+          }catch(error){
+            console.error(`Error fetching data from ${character.father}: ${error.message}`);
+            setIsLoadingFather(false);
+          }
         }
-  
+        else{
+          setIsLoadingMother(false);
+        }
+
         if (character.spouse !== '') {
           const response = await axios.get(character.spouse);
           setSpouseFetch(response.data);
+          setIsLoadingSpouse(false);
         }
-        
+        else{
+          setIsLoadingSpouse(false);
+        }
+
         if (character.allegiances.length > 0) {
           const allegiancesPromises = character.allegiances.map(async url => {
             try {
@@ -47,8 +76,12 @@ function Character({ character, history }) {
           })
           let allegiancesArray = await Promise.all(allegiancesPromises);
           setAllegiancesFetch(allegiancesArray);
+          setIsLoadingAllegiances(false);
         }
-  
+        else{
+          setIsLoadingAllegiances(false);
+        }
+
         if (character.books.length > 0) {
           const booksPromises = character.books.map(async url => {
             try {
@@ -59,13 +92,17 @@ function Character({ character, history }) {
               return null;
             }
           });
-  
+
           let booksArray = await Promise.all(booksPromises);
           setBooksFetch(booksArray);
+          setIsLoadingBooks(false);
         }
-  
+        else{
+          setIsLoadingBooks(false);
+        }
+
         if (character.povBooks.length > 0) {
-          const povBookPromises = character.povBook.map(async url => {
+          const povBookPromises = character.povBooks.map(async url => {
             try {
               const response = await axios.get(url);
               return response.data;
@@ -73,10 +110,14 @@ function Character({ character, history }) {
               console.error(`Error fetching data from ${url}: ${error.message}`);
               return null;
             }
-          });
-  
+          })
+
           let povBookArray = await Promise.all(povBookPromises);
           setPovPovBooksFetch(povBookArray);
+          setIsLoadingPovBooks(false);
+        }
+        else{
+          setIsLoadingPovBooks(false);
         }
       } catch (error) {
         console.error('An error occurred:', error.message);
@@ -84,7 +125,7 @@ function Character({ character, history }) {
     }
 
     fetchData();
-  }, [character]); 
+  }, [character]);
 
   return (
     <div className="container mt-4">
@@ -116,17 +157,47 @@ function Character({ character, history }) {
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
                           <label className="mx-2">Mother:</label>
-                          <br /> <CharacterSnip character={motherFetch} />
+                          {isLoadingMother ? (
+                            <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <br /> <CharacterSnip character={motherFetch} />
+                            </>
+                          )}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
                           <label className="mx-2">Father:</label>
-                          <br />
-                          <CharacterSnip character={fatherFetch} />
+                          {isLoadingFather ? (
+                            <div className='col-12 text-center mt-4'>
+                              <div className="spinner-border text-light" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <br />
+                              <CharacterSnip character={fatherFetch} />
+                            </>
+                          )}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
                           <label className="mx-2">Spouse:</label>
-                          <br />
-                          <CharacterSnip character={spouseFetch} />
+                          {isLoadingSpouse ? (
+                            <div className='col-12 text-center mt-4'>
+                            <div className="spinner-border text-light" role="status">
+                              <span className="visually-hidden">Loading...</span>
+                            </div>
+                          </div>
+                          ) : (
+                            <>
+                              <br />
+                              <CharacterSnip character={spouseFetch} />  
+                            </>
+                          )}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
                           <label className="mx-2">Culture: </label>
@@ -169,7 +240,7 @@ function Character({ character, history }) {
                       </div>
                       <div className="col-xs-12 col-sm-6 col-md-4">
                         <h4 className="text-center">Aliases</h4>
-                        {character.aliases.length > 0 ? (
+                        {character.aliases[0] !== '' ? (
                           <ul>
                             {character.aliases.map((alias, index) => (
                               <li key={index}>{alias}</li>
@@ -181,7 +252,13 @@ function Character({ character, history }) {
                       </div>
                       <div className="col-xs-12 col-sm-6 col-md-4">
                         <h4 className="text-center">Allegiances</h4>
-                        {allegiancesFetch ? (
+                        { isLoadingAllegienaces ? (
+                          <div className='col-12 text-center mt-4'>
+                          <div className="spinner-border text-light" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                        ):allegiancesFetch ? (
                           <ul>
                             {allegiancesFetch.map((ally, index) => (
                               <li key={index}>
@@ -199,7 +276,13 @@ function Character({ character, history }) {
                           <div className="character card-header">
                             <h4 className="character card-title text-center">Books</h4>
                           </div>
-                          {booksFetch ? (
+                          { isLoadingBooks ? (
+                            <div className='col-12 text-center mt-4'>
+                            <div className="spinner-border text-light" role="status">
+                              <span className="visually-hidden">Loading...</span>
+                            </div>
+                          </div>
+                          ):booksFetch ? (
                             <div className="character card-body">
                               <div className="container">
                                 <div className="row">
@@ -218,7 +301,13 @@ function Character({ character, history }) {
                         <hr />
                         <div className="col-xs-12">
                           <h4 className="text-center">POV Books</h4>
-                          {povBooksFetch? (
+                          {isLoadingPovBooks ? (
+                            <div className='col-12 text-center mt-4'>
+                            <div className="spinner-border text-light" role="status">
+                              <span className="visually-hidden">Loading...</span>
+                            </div>
+                          </div>
+                          ):povBooksFetch ? (
                             <div className="container">
                               <div className="row">
                                 {povBooksFetch.map((book, index) => (
