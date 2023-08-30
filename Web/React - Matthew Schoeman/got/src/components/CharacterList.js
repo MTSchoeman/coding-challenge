@@ -67,32 +67,32 @@ function CharacterList() {
           <div className='row'>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="searchName">Name</label>
-              <input className="form-control" type="text" name="searchName" placeholder="Jon Snow" value={searchName} onChange={(e) => setSearchName(e.target.value)} ></input>
+              <input className="character form-control bg-dark text-white" type="text" name="searchName" placeholder="Jon Snow" value={searchName} onChange={(e) => setSearchName(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="searchCulture">Culture</label>
-              <input className="form-control" type="text" name="searchCulture" placeholder="Northmen" value={searchCulture} onChange={(e) => setSearchCulture(e.target.value)} ></input>
+              <input className="character form-control bg-dark text-white" type="text" name="searchCulture" placeholder="Northmen" value={searchCulture} onChange={(e) => setSearchCulture(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="searchBorn">Born</label>
-              <input className="form-control" type="text" name="searchBorn" placeholder="283" value={searchBorn} onChange={(e) => setSearchBorn(e.target.value)} ></input>
+              <input className="character form-control bg-dark text-white" type="text" name="searchBorn" placeholder="283" value={searchBorn} onChange={(e) => setSearchBorn(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="searchDied">Died</label>
-              <input className="form-control" type="text" name="searchDied" placeholder="283" value={searchDied} onChange={(e) => setSearchDied(e.target.value)} ></input>
+              <input className="character form-control bg-dark text-white" type="text" name="searchDied" placeholder="283" value={searchDied} onChange={(e) => setSearchDied(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="gender">Gender</label>
-              <select className="form-control" type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
-                <option value="">Any</option>
+              <select className="character form-select bg-dark text-white" type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
+                <option value="" selected></option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="isAlive">Alive</label>
-              <select className="form-control" type="text" name="isAlive" value={gender} onChange={(e) => setIsAlive(e.target.value)} >
-                <option value="">Any</option>
+              <select className="character form-select bg-dark text-white" type="text" name="isAlive" value={gender} onChange={(e) => setIsAlive(e.target.value)} >
+                <option value="" selected></option>
                 <option value="true">Alive</option>
                 <option value="false">Dead</option>
               </select>
@@ -104,7 +104,7 @@ function CharacterList() {
               <div className='col-5'></div>
               <div className='col-2'>
                 <label className='form-label' htmlFor="characterListPageSize">Result Size</label>
-                <input className="form-control" type="text" name="characterListPageSize" placeholder="REsult Size (10)" min="1" value={characterListPageSize} onChange={(e) => setCharacterListPageSizee(e.target.value)} ></input>
+                <input className="character form-control bg-dark text-white" type="text" name="characterListPageSize" placeholder="REsult Size (10)" min="1" value={characterListPageSize} onChange={(e) => setCharacterListPageSizee(e.target.value)} ></input>
               </div>
             </div>
             <div className='col-5'></div>

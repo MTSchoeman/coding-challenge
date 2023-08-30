@@ -82,3 +82,11 @@ div.book.nav-container {
     color: white;
     font-weight:inherit;
   }
+
+  input.book.form-control::placeholder, select.book.form-select::placeholder{
+    color: rgba(255, 255, 255, 0.658);
+  }
+  input.book.form-control:focus, select.book.form-select{
+    border: none;
+    box-shadow: none;
+  }
