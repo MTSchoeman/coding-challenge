@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useBookContext } from '../context/BookContext';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
-
+import BookListCard from './BookListCard';
 import '../styles/BookList.css'
 function BookList() {
   const { books, fetchBooks } = useBookContext();
@@ -11,10 +11,10 @@ function BookList() {
   const [toReleaseDate, setToReleaseDate] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
-
+  const [bookListPageSize, setBookListPageSize] = useState(10);
   const handleSearch = async () => {
     setSearching(true);
-    const apiUrl = `https://anapioficeandfire.com/api/books?name=${searchName}&fromReleaseDate=${fromReleaseDate}T00:00:00&toReleaseDate=${toReleaseDate}T00:00:00`;
+    const apiUrl = `https://anapioficeandfire.com/api/books?pageSize=${bookListPageSize}&name=${searchName}&fromReleaseDate=${fromReleaseDate}T00:00:00&toReleaseDate=${toReleaseDate}T00:00:00`;
 
     try {
       const response = await fetch(apiUrl);
@@ -62,6 +62,17 @@ function BookList() {
             </div>
           </div>
           <div className='col-12 text-center'>
+            <div className='row'>
+
+              <div className='col-5'></div>
+              <div className='col-2'>
+                <label className='form-label' htmlFor="bookListPageSize">Result Size</label>
+                <input className="form-control" type="text" name="bookListPageSize" placeholder="REsult Size (10)" min="1" value={bookListPageSize} onChange={(e) => setBookListPageSize(e.target.value)} ></input>
+              </div>
+            </div>
+            <div className='col-5'></div>
+          </div>
+          <div className='col-12 text-center'>
               {searching ? (
                 <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
                   Searching...
@@ -87,34 +98,8 @@ function BookList() {
                 state: { book: book },
               }}
               key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-            >
-              <div>
-                <div className="bookList card">
-                  <div className="bookList card-header text-center">
-                    <h4 className="bookList card-title">{book.name}</h4>
-                  </div>
-                  <div className="bookList card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h4>Title: </h4>
-                        <h6>{book.name ? book.name : 'Unknown'}</h6>
-                      </div>
-                      <div className="col-md-6">
-
-                        <h4>ISBN: </h4>
-                        <h6> {book.isbn ? book.isbn : 'Unknown'}</h6>
-                      </div>
-                      <hr />
-                      <div className="col-xs-12">
-
-                        <h4>Author: </h4>
-                        <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+              <BookListCard book={book} />
             </Link>
           ))
         ) : (
@@ -125,34 +110,8 @@ function BookList() {
                 state: { book: book },
               }}
               key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-            >
-              <div>
-                <div className="bookList card">
-                  <div className="bookList card-header text-center">
-                    <h4 className="bookList card-title">{book.name}</h4>
-                  </div>
-                  <div className="bookList card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h4>Title: </h4>
-                        <h6>{book.name ? book.name : 'Unknown'}</h6>
-                      </div>
-                      <div className="col-md-6">
-
-                        <h4>ISBN: </h4>
-                        <h6> {book.isbn ? book.isbn : 'Unknown'}</h6>
-                      </div>
-                      <hr />
-                      <div className="col-xs-12">
-
-                        <h4>Author: </h4>
-                        <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+              <BookListCard book={book} />
             </Link>
           ))
         )}

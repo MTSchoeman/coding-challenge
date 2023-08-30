@@ -3,6 +3,8 @@ import { useCharacterContext } from '../context/CharacterContext';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
 import '../styles/CharacterList.css'
+
+import CharacterListCard from './CharacterListCard';
 function CharacterList() {
   const { characters, fetchCharacters } = useCharacterContext();
   const [searchName, setSearchName] = useState('');
@@ -12,6 +14,7 @@ function CharacterList() {
   const [isAlive, setIsAlive] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
+  const [characterListPageSize, setCharacterListPageSizee] = useState(10);
 
   const handleSearch = async () => {
     setSearching(true);
@@ -20,7 +23,7 @@ function CharacterList() {
     if (searchBorn !== '') {
       newSearchBorn = `In ${searchBorn.trim()} AC`;
     }
-    const apiUrl = `https://anapioficeandfire.com/api/characters?name=${searchName}&culture=${searchCulture}&born=${newSearchBorn}&gender=${gender}&isAlive=${isAlive}`;
+    const apiUrl = `https://anapioficeandfire.com/api/characters?pageSize=${characterListPageSize}&name=${searchName}&culture=${searchCulture}&born=${newSearchBorn}&gender=${gender}&isAlive=${isAlive}`;
 
     try {
       const response = await fetch(apiUrl);
@@ -87,19 +90,30 @@ function CharacterList() {
             </div>
           </div>
           <div className='col-12 text-center'>
-              {searching ? (
-                <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
-                  Searching...
-                </button>
-              ) : (
-                <button className='btn btn-outline-light mx-1 mt-2' type="button" onClick={handleSearch} name="search">
-                  Search
-                </button>
-              )}
-              <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="cancel">
-                Cancel
-              </button>
+            <div className='row'>
+
+              <div className='col-5'></div>
+              <div className='col-2'>
+                <label className='form-label' htmlFor="characterListPageSize">Result Size</label>
+                <input className="form-control" type="text" name="characterListPageSize" placeholder="REsult Size (10)" min="1" value={characterListPageSize} onChange={(e) => setCharacterListPageSizee(e.target.value)} ></input>
+              </div>
             </div>
+            <div className='col-5'></div>
+          </div>
+          <div className='col-12 text-center'>
+            {searching ? (
+              <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
+                Searching...
+              </button>
+            ) : (
+              <button className='btn btn-outline-light mx-1 mt-2' type="button" onClick={handleSearch} name="search">
+                Search
+              </button>
+            )}
+            <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="cancel">
+              Cancel
+            </button>
+          </div>
         </nav>
       </div>
       <div className="row">
@@ -111,32 +125,8 @@ function CharacterList() {
                 state: { character: character },
               }}
               key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-            >
-              <div>
-                <div className="characterList card">
-                  <div className="characterList card-header text-center">
-                    <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
-                  </div>
-                  <div className="characterList card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h4>Gender:</h4>
-                        <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
-                      </div>
-                      <div className="col-md-6">
-                        <h4>Culture:</h4>
-                        <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
-                      </div>
-                      <hr />
-                      <div className="col-xs-12">
-                        <h4>Born:</h4>
-                        <h6>{character.born ? character.born : 'Date not specified'}</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+              <CharacterListCard character={character}/>
             </Link>
           ))
         ) : (
@@ -147,32 +137,8 @@ function CharacterList() {
                 state: { character: character },
               }}
               key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-            >
-              <div>
-                <div className="characterList card">
-                  <div className="characterList card-header text-center">
-                    <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
-                  </div>
-                  <div className="characterList card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h4>Gender:</h4>
-                        <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
-                      </div>
-                      <div className="col-md-6">
-                        <h4>Culture:</h4>
-                        <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
-                      </div>
-                      <hr />
-                      <div className="col-xs-12">
-                        <h4>Born:</h4>
-                        <h6>{character.born ? character.born : 'Date not specified'}</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+               <CharacterListCard character={character}/>
             </Link>
           ))
         )}

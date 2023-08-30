@@ -3,6 +3,7 @@ import { useHouseContext } from '../context/HouseContext';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
 import '../styles/HouseList.css'
+import HouseListCard from './HouseListCard';
 function HouseList() {
   const { houses, fetchHouses } = useHouseContext();
   const [searchName, setSearchName] = useState('');
@@ -15,14 +16,14 @@ function HouseList() {
   const [hasAncestralWeapons, setHasAncestralWeapons] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
-
+  const [houseListPageSize, setHouseListPageSize] = useState(10);
   const handleSearch = async () => {
     setSearching(true);
     let newSearchName = '';
     if (searchName !== '') {
       newSearchName = `House ${searchName.trim()}`
     }
-    const apiUrl = `https://anapioficeandfire.com/api/houses?name=${newSearchName}&searchRegion=${searchRegion}&searchWords=${searchWords}&hasDiedOut=${hasDiedOut}&hasTitles=${hasTitles}&hasSeats=${hasSeats}&hasWords=${hasWords}&hasAncestralWeapons=${hasAncestralWeapons}`;
+    const apiUrl = `https://anapioficeandfire.com/api/houses?pageSize=${houseListPageSize}&name=${newSearchName}&searchRegion=${searchRegion}&searchWords=${searchWords}&hasDiedOut=${hasDiedOut}&hasTitles=${hasTitles}&hasSeats=${hasSeats}&hasWords=${hasWords}&hasAncestralWeapons=${hasAncestralWeapons}`;
 
     try {
       const response = await fetch(apiUrl);
@@ -114,6 +115,16 @@ function HouseList() {
               </select>
             </div>
             <div className='col-12 text-center'>
+            <div className='row'>
+              <div className='col-5'></div>
+              <div className='col-2'>
+                <label className='form-label' htmlFor="houseListPageSize">Result Size</label>
+                <input className="form-control" type="text" name="houseListPageSize" placeholder="REsult Size (10)" min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
+              </div>
+            </div>
+            <div className='col-5'></div>
+          </div>
+            <div className='col-12 text-center'>
               {searching ? (
                 <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
                   Searching...
@@ -139,33 +150,8 @@ function HouseList() {
                 state: { house: house },
               }}
               key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-            >
-              <div>
-                <div className="houseList card">
-                  <div className="houseList card-header text-center">
-                    <h4 className="houseList card-title">{house.name}</h4>
-                  </div>
-                  <div className="houseList card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-                        <h4>Region: </h4>
-                        <h6>{house.region ? house.region : 'Unknown'}</h6>
-                      </div>
-                      <div className="col-md-6">
-                        <h4>Words: </h4>
-                        <h6>{house.words ? house.words : 'Unknown'}</h6>
-                      </div>
-                      <hr />
-                      <div className="col-xs-12">
-
-                        <h4>Coat of Arms: </h4>
-                        <h6> {house.coatOfArms ? house.coatOfArms : 'Unknown'}</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+              <HouseListCard house={house} />
             </Link>
           ))
         ) : (
@@ -176,35 +162,8 @@ function HouseList() {
                 state: { house: house },
               }}
               key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-            >
-              <div>
-                <div className="houseList card">
-                  <div className="houseList card-header text-center">
-                    <h4 className="houseList card-title">{house.name}</h4>
-                  </div>
-                  <div className="houseList card-body">
-                    <div className="row">
-                      <div className="col-md-6">
-
-                        <h4>Region: </h4>
-                        <h6>{house.region ? house.region : 'Unknown'}</h6>
-                      </div>
-                      <div className="col-md-6">
-
-                        <h4>Words: </h4>
-                        <h6>{house.words ? house.words : 'Unknown'}</h6>
-                      </div>
-                      <hr />
-                      <div className="col-xs-12">
-
-                        <h4>Coat of Arms: </h4>
-                        <h6> {house.coatOfArms ? house.coatOfArms : 'Unknown'}</h6>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+              <HouseListCard house={house} />
             </Link>
           ))
         )}
