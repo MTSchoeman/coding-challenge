@@ -17,9 +17,10 @@ function CharacterList() {
   const [searching, setSearching] = useState(false);
   const [characterListPageSize, setCharacterListPageSizee] = useState(10);
 
+  var showingSearchResults = false;
   const handleSearch = async () => {
     setSearching(true);
-
+    showingSearchResults = true;
     let newSearchBorn = '';
     if (searchBorn !== '') {
       newSearchBorn = `In ${searchBorn.trim()} AC`;
@@ -48,6 +49,7 @@ function CharacterList() {
   };
 
   const handleCancel = () => {
+    showingSearchResults = false;
     setSearchName('');
     setSearchCulture('');
     setSearchBorn('');
@@ -59,7 +61,7 @@ function CharacterList() {
   return (
     <div className='container-fluid'>
       <div id='sticky-container'>
-        {!searchResults[0] && <Pagination componentName="character" />}
+        {!searchResults[0] && !showingSearchResults && <Pagination componentName="character" />}
       </div>
       <div className='character nav-container'>
         <nav className='container'>

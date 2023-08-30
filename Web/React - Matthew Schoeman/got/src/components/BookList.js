@@ -12,7 +12,10 @@ function BookList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [bookListPageSize, setBookListPageSize] = useState(10);
+
+  var showingSearchResults = false;
   const handleSearch = async () => {
+    showingSearchResults = true;
     setSearching(true);
     const apiUrl = `https://anapioficeandfire.com/api/books?pageSize=${bookListPageSize}&name=${searchName}&fromReleaseDate=${fromReleaseDate}T00:00:00&toReleaseDate=${toReleaseDate}T00:00:00`;
 
@@ -33,6 +36,7 @@ function BookList() {
   }
 
   const handleCancel = () => {
+    showingSearchResults = false;
     setSearchName('');
     setFromReleaseDate('');
     setToReleaseDate('');
@@ -42,7 +46,7 @@ function BookList() {
   return (
     <div className='container-fluid'>
       <div id='sticky-container'>
-        <Pagination componentName="book" />
+        {!searchResults[0] && !showingSearchResults && <Pagination componentName="book" />}
       </div>
       <div className='book nav-container'>
         <nav className='container'>

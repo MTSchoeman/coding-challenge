@@ -17,15 +17,17 @@ function HouseList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [houseListPageSize, setHouseListPageSize] = useState(10);
-  
+
+  var showingSearchResults = false;
+
   const handleSearch = async () => {
+    showingSearchResults = true;
     setSearching(true);
     let newSearchName = '';
     if (searchName !== '') {
       newSearchName = `House ${searchName.trim()}`
     }
     const apiUrl = `https://anapioficeandfire.com/api/houses?pageSize=${houseListPageSize}&name=${newSearchName}&region=${searchRegion}&words=${searchWords}&hasDiedOut=${hasDiedOut}&hasTitles=${hasTitles}&hasSeats=${hasSeats}&hasWords=${hasWords}&hasAncestralWeapons=${hasAncestralWeapons}`;
-
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
@@ -43,6 +45,7 @@ function HouseList() {
   };
 
   const handleCancel = () => {
+    showingSearchResults = false;
     setSearchName('');
     setSearchRegion('');
     setSearchWords('');
@@ -55,9 +58,22 @@ function HouseList() {
   };
 
   return (
+
     <div className='container-fluid'>
+      <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+        <div className="toast-header">
+          <strong className="mr-auto">Toast Title</strong>
+          <small className="text-muted">Just now</small>
+          <button type="button" className="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="toast-body">
+          This is a Bootstrap toast that appears when the counter reaches 0.
+        </div>
+      </div>
       <div id='sticky-container'>
-        {!searchResults[0] && <Pagination componentName="house" />}
+        {!searchResults[0] && !showingSearchResults && <Pagination componentName="house" />}
       </div>
       <div className='nav-container'>
         <nav className='container'>
@@ -116,15 +132,15 @@ function HouseList() {
               </select>
             </div>
             <div className='col-12 text-center'>
-            <div className='row'>
-              <div className='col-4 col-sm-4 col-md-5'></div>
-              <div className='col-4 col-sm-4 col-md-2'>
-                <label className='form-label' htmlFor="houseListPageSize">Result Size</label>
-                <input className="house form-control bg-dark text-white" type="text" name="houseListPageSize" placeholder="REsult Size (10)" min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
+              <div className='row'>
+                <div className='col-4 col-sm-4 col-md-5'></div>
+                <div className='col-4 col-sm-4 col-md-2'>
+                  <label className='form-label' htmlFor="houseListPageSize">Result Size</label>
+                  <input className="house form-control bg-dark text-white" type="text" name="houseListPageSize" placeholder="REsult Size (10)" min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
+                </div>
               </div>
+              <div className='col-4 col-sm-4 col-md-5'></div>
             </div>
-            <div className='col-4 col-sm-4 col-md-5'></div>
-          </div>
             <div className='col-12 text-center'>
               {searching ? (
                 <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
@@ -143,13 +159,13 @@ function HouseList() {
         </nav>
       </div>
       <div className="row">
-        { houseListLoading ? (
+        {houseListLoading ? (
           <div className='col-12 text-center mt-4'>
-          <div className="spinner-border text-light" role="status">
-            <span className="visually-hidden">Loading...</span>
+            <div className="spinner-border text-light" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
-        </div>
-        ):searchResults.length > 0 ? (
+        ) : searchResults.length > 0 ? (
           searchResults.map((house, index) => (
             <Link
               to={{
