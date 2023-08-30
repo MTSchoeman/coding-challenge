@@ -53,134 +53,126 @@ function CharacterList() {
       <div id='sticky-container'>
         <Pagination componentName="character" />
       </div>
-      <h1>Game of Thrones Characters</h1>
-      <nav>
-        <label htmlFor="searchName">Search by Name</label>
-        <input
-          type="text"
-          name="searchName"
-          placeholder="Walder"
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
-        ></input>
-        <br />
-        <label htmlFor="searchCulture">Search by Culture</label>
-        <input
-          type="text"
-          name="searchCulture"
-          placeholder="Braavosi"
-          value={searchCulture}
-          onChange={(e) => setSearchCulture(e.target.value)}
-        ></input>
-        <br />
-        <label htmlFor="searchBorn">Search by Born</label>
-        <input
-          type="number"
-          name="searchBorn"
-          placeholder="283"
-          value={searchBorn}
-          onChange={(e) => setSearchBorn(e.target.value)}
-        ></input>
-        <div className="filterCharacter">
-          <label htmlFor="gender">Gender</label>
-          <select value={gender} onChange={(e) => setGender(e.target.value)}>
-            <option value="">Any</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          <label htmlFor="isAlive">Alive</label>
-          <select value={isAlive} onChange={(e) => setIsAlive(e.target.value)}>
-            <option value="">Any</option>
-            <option value="true">Alive</option>
-            <option value="false">Dead</option>
-          </select>
-          <br />
-          {searching ? (
-            <button type="button" disabled>
-              Searching...
-            </button>
-          ) : (
-            <button type="button" onClick={handleSearch} name="search">
-              Search
-            </button>
-          )}
-          <button type="button" onClick={handleCancel} name="cancel">
-            Cancel
-          </button>
-        </div>
-      </nav>
-
+      <div className='character nav-container'>
+        <nav className='container'>
+          <h1 className='text-center'>Characters</h1>
+          <div className='row'>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="searchName">Name</label>
+              <input className="form-control" type="text" name="searchName" placeholder="Jon Snow" value={searchName} onChange={(e) => setSearchName(e.target.value)} ></input>
+            </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="searchCulture">Culture</label>
+              <input className="form-control" type="text" name="searchCulture" placeholder="Northmen" value={searchCulture} onChange={(e) => setSearchCulture(e.target.value)} ></input>
+            </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="searchBorn">Born</label>
+              <input className="form-control" type="text" name="searchBorn" placeholder="283" value={searchBorn} onChange={(e) => setSearchBorn(e.target.value)} ></input>
+            </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="gender">Gender</label>
+              <select className="form-control" type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
+                <option value="">Any</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="isAlive">Alive</label>
+              <select className="form-control" type="text" name="isAlive" value={gender} onChange={(e) => setIsAlive(e.target.value)} >
+                <option value="">Any</option>
+                <option value="true">Alive</option>
+                <option value="false">Dead</option>
+              </select>
+            </div>
+          </div>
+          <div className='col-12 text-center'>
+              {searching ? (
+                <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
+                  Searching...
+                </button>
+              ) : (
+                <button className='btn btn-outline-light mx-1 mt-2' type="button" onClick={handleSearch} name="search">
+                  Search
+                </button>
+              )}
+              <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="cancel">
+                Cancel
+              </button>
+            </div>
+        </nav>
+      </div>
       <div className="row">
         {searchResults.length > 0 ? (
           searchResults.map((character, index) => (
             <Link
-                to={{
-                  pathname: `/characters/${character.name === '' ? 'Nameless' : character.name}`,
-                  state: { character: character },
-                }}
-                key={index}
+              to={{
+                pathname: `/characters/${character.name === '' ? 'Nameless' : character.name}`,
+                state: { character: character },
+              }}
+              key={index}
               className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-              >
-            <div>
-              <div className="characterList card">
-                <div className="characterList card-header text-center">
-                  <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
-                </div>
-                <div className="characterList card-body">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <h4>Gender:</h4>
-                      <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
-                    </div>
-                    <div className="col-md-6">
-                      <h4>Culture:</h4>
-                      <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
-                    </div>
-                    <hr />
-                    <div className="col-xs-12">
-                      <h4>Born:</h4>
-                      <h6>{character.born ? character.born : 'Date not specified'}</h6>
+            >
+              <div>
+                <div className="characterList card">
+                  <div className="characterList card-header text-center">
+                    <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
+                  </div>
+                  <div className="characterList card-body">
+                    <div className="row">
+                      <div className="col-md-6">
+                        <h4>Gender:</h4>
+                        <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
+                      </div>
+                      <div className="col-md-6">
+                        <h4>Culture:</h4>
+                        <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
+                      </div>
+                      <hr />
+                      <div className="col-xs-12">
+                        <h4>Born:</h4>
+                        <h6>{character.born ? character.born : 'Date not specified'}</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
             </Link>
           ))
         ) : (
           characters.map((character, index) => (
             <Link
-                to={{
-                  pathname: `/characters/${character.name === '' ? 'Nameless' : character.name}`,
-                  state: { character: character },
-                }}
-                key={index}
+              to={{
+                pathname: `/characters/${character.name === '' ? 'Nameless' : character.name}`,
+                state: { character: character },
+              }}
+              key={index}
               className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2"
-              >
-            <div>
-              <div className="characterList card">
-                <div className="characterList card-header text-center">
-                  <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
-                </div>
-                <div className="characterList card-body">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <h4>Gender:</h4>
-                      <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
-                    </div>
-                    <div className="col-md-6">
-                      <h4>Culture:</h4>
-                      <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
-                    </div>
-                    <hr />
-                    <div className="col-xs-12">
-                      <h4>Born:</h4>
-                      <h6>{character.born ? character.born : 'Date not specified'}</h6>
+            >
+              <div>
+                <div className="characterList card">
+                  <div className="characterList card-header text-center">
+                    <h4 className="characterList card-title">{character.name ? character.name : 'Nameless'}</h4>
+                  </div>
+                  <div className="characterList card-body">
+                    <div className="row">
+                      <div className="col-md-6">
+                        <h4>Gender:</h4>
+                        <h6>{character.gender ? character.gender : 'Gender not specified'}</h6>
+                      </div>
+                      <div className="col-md-6">
+                        <h4>Culture:</h4>
+                        <h6>{character.culture ? character.culture : 'Culture not specified'}</h6>
+                      </div>
+                      <hr />
+                      <div className="col-xs-12">
+                        <h4>Born:</h4>
+                        <h6>{character.born ? character.born : 'Date not specified'}</h6>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
             </Link>
           ))
         )}

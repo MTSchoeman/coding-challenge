@@ -3,6 +3,7 @@ import { PageService } from "../services/PageService";
 import { useCharacterContext } from "../context/CharacterContext";
 import { useHouseContext } from "../context/HouseContext";
 import { useBookContext } from "../context/BookContext";
+import '../styles/Pagination.css'
 function Pagination({ componentName }) {
 
     const { fetchCharacters } = useCharacterContext();
@@ -92,7 +93,7 @@ function Pagination({ componentName }) {
                 </div>
             </div>
             <div className="col-xs-12 col-md-4 mt-2 text-center">
-                <h5> {GetCurrentPage()} of {GetLastPage()}</h5>
+                <h5 id="numberOfPages"> {GetCurrentPage()} of {GetLastPage()}</h5>
             </div>
         </div>
     );

@@ -66,3 +66,19 @@
     padding: 1rem;
     background-color: #21252957;
 }
+
+div.book.nav-container {
+    background-color: rgba(87, 86, 86, 0.026);
+    border-radius:  1rem;
+    box-shadow: inset 0px 0px 1rem 0px rgba(255, 255, 255, 0.197);
+    padding: 1rem;
+    backdrop-filter: blur(2rem)
+  }
+  div.book.nav-container > nav > h1{
+    color: #5c7ed0;
+  }
+  
+  nav .form-label{
+    color: white;
+    font-weight:inherit;
+  }
