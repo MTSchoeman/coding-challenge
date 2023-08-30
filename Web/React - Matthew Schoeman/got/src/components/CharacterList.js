@@ -10,6 +10,7 @@ function CharacterList() {
   const [searchName, setSearchName] = useState('');
   const [searchCulture, setSearchCulture] = useState('');
   const [searchBorn, setSearchBorn] = useState('');
+  const [searchDied, setSearchDied] = useState('');
   const [gender, setGender] = useState('');
   const [isAlive, setIsAlive] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -19,11 +20,15 @@ function CharacterList() {
   const handleSearch = async () => {
     setSearching(true);
 
-    let newSearchBorn = ''
+    let newSearchBorn = '';
     if (searchBorn !== '') {
       newSearchBorn = `In ${searchBorn.trim()} AC`;
     }
-    const apiUrl = `https://anapioficeandfire.com/api/characters?pageSize=${characterListPageSize}&name=${searchName}&culture=${searchCulture}&born=${newSearchBorn}&gender=${gender}&isAlive=${isAlive}`;
+    let newSearchDied = '';
+    if (searchDied !== '') {
+      newSearchDied = `In ${searchDied.trim()} AC`;
+    }
+    const apiUrl = `https://anapioficeandfire.com/api/characters?pageSize=${characterListPageSize}&name=${searchName}&culture=${searchCulture}&born=${newSearchBorn}&died=${newSearchDied}&gender=${gender}&isAlive=${isAlive}`;
 
     try {
       const response = await fetch(apiUrl);
@@ -54,7 +59,7 @@ function CharacterList() {
   return (
     <div className='container-fluid'>
       <div id='sticky-container'>
-        <Pagination componentName="character" />
+        {!searchResults[0] && <Pagination componentName="character" />}
       </div>
       <div className='character nav-container'>
         <nav className='container'>
@@ -71,6 +76,10 @@ function CharacterList() {
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="searchBorn">Born</label>
               <input className="form-control" type="text" name="searchBorn" placeholder="283" value={searchBorn} onChange={(e) => setSearchBorn(e.target.value)} ></input>
+            </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="searchDied">Died</label>
+              <input className="form-control" type="text" name="searchDied" placeholder="283" value={searchDied} onChange={(e) => setSearchDied(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="gender">Gender</label>

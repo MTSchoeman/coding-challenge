@@ -23,7 +23,7 @@ function HouseList() {
     if (searchName !== '') {
       newSearchName = `House ${searchName.trim()}`
     }
-    const apiUrl = `https://anapioficeandfire.com/api/houses?pageSize=${houseListPageSize}&name=${newSearchName}&searchRegion=${searchRegion}&searchWords=${searchWords}&hasDiedOut=${hasDiedOut}&hasTitles=${hasTitles}&hasSeats=${hasSeats}&hasWords=${hasWords}&hasAncestralWeapons=${hasAncestralWeapons}`;
+    const apiUrl = `https://anapioficeandfire.com/api/houses?pageSize=${houseListPageSize}&name=${newSearchName}&region=${searchRegion}&words=${searchWords}&hasDiedOut=${hasDiedOut}&hasTitles=${hasTitles}&hasSeats=${hasSeats}&hasWords=${hasWords}&hasAncestralWeapons=${hasAncestralWeapons}`;
 
     try {
       const response = await fetch(apiUrl);
@@ -56,7 +56,7 @@ function HouseList() {
   return (
     <div className='container-fluid'>
       <div id='sticky-container'>
-        <Pagination componentName="house" />
+        {!searchResults[0] && <Pagination componentName="house" />}
       </div>
       <div className='nav-container'>
         <nav className='container'>
