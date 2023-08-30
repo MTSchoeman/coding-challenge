@@ -48,15 +48,15 @@ function BookList() {
         <nav className='container'>
           <h1 className='text-center'>Books</h1>
           <div className='row'>
-            <div className='col-6 col-sm-4 col-md text-center'>
+            <div className='col-6 col-sm-12 col-md text-center'>
               <label className='form-label' htmlFor="searchName">Name of Book</label>
               <input className='book form-control bg-dark text-white' ype="text" name="searchName" placeholder="Search by Name" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
             </div>
-            <div className='col-6 col-sm-4 col-md text-center'>
+            <div className='col-6 col-sm-6 col-md text-center'>
               <label className='form-label' htmlFor="fromReleaseDate">From Release Date:</label>
               <input className='book form-control bg-dark text-white' type="date" name="fromReleaseDate" value={fromReleaseDate} onChange={(e) => setFromReleaseDate(e.target.value)} />
             </div>
-            <div className='col-6 col-sm-4 col-md text-center'>
+            <div className='col-6 col-sm-6 col-md text-center'>
               <label className='form-label' htmlFor="toReleaseDate">To Release Date:</label>
               <input className='book form-control bg-dark text-white' type="date" name="toReleaseDate" value={toReleaseDate} onChange={(e) => setToReleaseDate(e.target.value)} />
             </div>

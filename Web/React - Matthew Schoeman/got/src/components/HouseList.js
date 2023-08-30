@@ -106,7 +106,7 @@ function HouseList() {
                 <option value="false">No</option>
               </select>
             </div>
-            <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
+            <div className='col-6 col-sm-5 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="hasAncestralWeapons">Ancestral Weapons</label>
               <select className='house form-select bg-dark text-white' value={hasAncestralWeapons} onChange={(e) => setHasAncestralWeapons(e.target.value)}>
                 <option value="" selected></option>
