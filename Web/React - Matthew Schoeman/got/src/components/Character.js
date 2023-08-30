@@ -259,7 +259,7 @@ function Character({ character, history }) {
             </div>
           </div>
           : (
-            <h1 style="{'color' : 'white'}">Retrieving Character Details</h1>
+            <h1>Retrieving Character Details</h1>
           )}
       </div>
     </div>

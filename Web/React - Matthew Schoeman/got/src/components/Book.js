@@ -164,7 +164,7 @@ function Book({ book, history }) {
             </div>
           </div>
         ) : (
-          <h1 style={{ color: 'white' }}>Retrieving Book Details</h1>
+          <h1>Retrieving Book Details</h1>
         )}
       </div>
     </div>

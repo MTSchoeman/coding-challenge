@@ -191,7 +191,7 @@ function House({ house, history }) {
                               </div>
                             </div>
                           ) : (
-                            <p style={{ color: 'white' }}>No Sworn Members</p>
+                            <p>No Sworn Members</p>
                           )}
                         </div>
                       </div>
