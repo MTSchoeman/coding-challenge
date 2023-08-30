@@ -84,6 +84,9 @@ div.character.nav-container {
     font-weight:inherit;
   }
 
+  select.character.form-select{
+    border: 1px solid white;
+  }
   input.character.form-control::placeholder, select.character.form-select::placeholder{
     color: rgba(255, 255, 255, 0.658);
   }
