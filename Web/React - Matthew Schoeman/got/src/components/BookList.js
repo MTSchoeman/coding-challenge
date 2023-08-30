@@ -82,8 +82,8 @@ function BookList() {
                   Search
                 </button>
               )}
-              <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="cancel">
-                Cancel
+              <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="clear">
+                Clear
               </button>
             </div>
         </nav>
