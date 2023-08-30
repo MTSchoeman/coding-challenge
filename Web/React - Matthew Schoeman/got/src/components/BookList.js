@@ -49,7 +49,7 @@ function BookList() {
           <h1 className='text-center'>Books</h1>
           <div className='row'>
             <div className='col-6 col-sm-4 col-md text-center'>
-              <label className='form-label' htmlFor="searchName">Name</label>
+              <label className='form-label' htmlFor="searchName">Name of Book</label>
               <input className='book form-control bg-dark text-white' ype="text" name="searchName" placeholder="Search by Name" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
             </div>
             <div className='col-6 col-sm-4 col-md text-center'>

@@ -74,14 +74,6 @@ function CharacterList() {
               <input className="character form-control bg-dark text-white" type="text" name="searchCulture" placeholder="Northmen" value={searchCulture} onChange={(e) => setSearchCulture(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
-              <label className='form-label' htmlFor="searchBorn">Born</label>
-              <input className="character form-control bg-dark text-white" type="text" name="searchBorn" placeholder="283" value={searchBorn} onChange={(e) => setSearchBorn(e.target.value)} ></input>
-            </div>
-            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
-              <label className='form-label' htmlFor="searchDied">Died</label>
-              <input className="character form-control bg-dark text-white" type="text" name="searchDied" placeholder="283" value={searchDied} onChange={(e) => setSearchDied(e.target.value)} ></input>
-            </div>
-            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="gender">Gender</label>
               <select className="character form-select bg-dark text-white" type="text" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} >
                 <option value="" selected></option>
@@ -90,13 +82,24 @@ function CharacterList() {
               </select>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
-              <label className='form-label' htmlFor="isAlive">Alive</label>
+              <label className='form-label' htmlFor="isAlive">Vital Status</label>
               <select className="character form-select bg-dark text-white" type="text" name="isAlive" value={gender} onChange={(e) => setIsAlive(e.target.value)} >
                 <option value="" selected></option>
-                <option value="true">Alive</option>
-                <option value="false">Dead</option>
+                <option value="true">Living</option>
+                <option value="false">Deceased</option>
               </select>
             </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+              <label className='form-label' htmlFor="searchBorn">Born</label>
+              <input className="character form-control bg-dark text-white" type="text" name="searchBorn" placeholder="283" value={searchBorn} onChange={(e) => setSearchBorn(e.target.value)} ></input>
+            </div>
+            {isAlive !== 'true' && (
+
+              <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+                <label className='form-label' htmlFor="searchDied">Died</label>
+                <input className="character form-control bg-dark text-white" type="text" name="searchDied" placeholder="283" value={searchDied} onChange={(e) => setSearchDied(e.target.value)} ></input>
+            </div>
+              )}
           </div>
           <div className='col-12 text-center'>
             <div className='row'>
