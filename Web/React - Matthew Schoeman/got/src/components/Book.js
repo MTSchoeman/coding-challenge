@@ -59,7 +59,7 @@ function Book({ book, history }) {
   }, [book]);
 
   return (
-    <div className='container mt-4'>
+    <div className='container my-4'>
       <div className='row'>
         {book ? (
           <div className='col-12'>
@@ -70,7 +70,7 @@ function Book({ book, history }) {
                     <button className='btn btn-outline-light my-2' onClick={handleGoBack}>Go Back</button>
                   </div>
                   <div className='col-8 text-center'>
-                    <h1 classname="book card-title">{book.name ?? 'Nameless'} </h1>
+                    <h1 className="book card-title">{book.name ?? 'Nameless'} </h1>
                   </div>
                   <div className='col-2'></div>
                 </div>

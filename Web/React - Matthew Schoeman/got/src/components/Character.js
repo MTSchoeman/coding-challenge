@@ -128,7 +128,7 @@ function Character({ character, history }) {
   }, [character]);
 
   return (
-    <div className="container mt-4">
+    <div className="container my-4">
       <div className="row">
         {character ?
           <div className='col-12'>

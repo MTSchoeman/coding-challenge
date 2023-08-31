@@ -128,7 +128,7 @@ function House({ house, history }) {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container my-4">
       {house ? (
         <div className="row">
           <div className="col-12">
