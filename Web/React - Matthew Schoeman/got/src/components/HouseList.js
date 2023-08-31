@@ -125,7 +125,7 @@ function HouseList() {
                 <div className='col-4 col-sm-4 col-md-5'></div>
                 <div className='col-4 col-sm-4 col-md-2'>
                   <label className='form-label' htmlFor="houseListPageSize">Result Size</label>
-                  <input id='houseListPageSize' className="house form-control bg-dark text-white" type="text" name="houseListPageSize" placeholder="REsult Size (10)" min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
+                  <input id='houseListPageSize' className="house form-control bg-dark text-white" type="text" name="houseListPageSize" placeholder={houseListPageSize} min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
                 </div>
               </div>
               <div className='col-4 col-sm-4 col-md-5'></div>

@@ -110,7 +110,7 @@ function CharacterList() {
               <div className='col-4 col-sm-4 col-md-5'></div>
               <div className='col-4 col-sm-4 col-md-2'>
                 <label className='form-label' htmlFor="characterListPageSize">Result Size</label>
-                <input id='characterListPageSize' className="character form-control bg-dark text-white" type="text" name="characterListPageSize" placeholder="REsult Size (10)" min="1" value={characterListPageSize} onChange={(e) => setCharacterListPageSizee(e.target.value)} ></input>
+                <input id='characterListPageSize' className="character form-control bg-dark text-white" type="text" name="characterListPageSize" placeholder={characterListPageSize} min="1" value={characterListPageSize} onChange={(e) => setCharacterListPageSizee(e.target.value)} ></input>
               </div>
             </div>
             <div className='col-4 col-sm-4 col-md-5'></div>
