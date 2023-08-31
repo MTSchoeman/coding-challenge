@@ -23,7 +23,6 @@ function Book({ book, history }) {
               const response = await axios.get(url);
               return response.data;
             } catch (error) {
-              console.error(`Error fetching data from ${url}: ${error.message}`);
               return null;
             }
           })
@@ -41,7 +40,6 @@ function Book({ book, history }) {
               const response = await axios.get(url);
               return response.data;
             } catch (error) {
-              console.error(`Error fetching data from ${url}: ${error.message}`);
               return null;
             }
           });
@@ -54,17 +52,12 @@ function Book({ book, history }) {
           setIsLoadingPOVCharacters(false);
         }
       } catch (error) {
-        console.error('An error occurred:', error.message);
       }
     }
 
     fetchData();
   }, [book]);
 
-  const FormatDate = (time) => {
-    const date = new Date(time);
-    return date.toLocaleDateString();
-  }
   return (
     <div className='container mt-4'>
       <div className='row'>
@@ -88,27 +81,27 @@ function Book({ book, history }) {
                     <div className="container">
                       <div className="row px-2">
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
-                          <label className="mx-2">ISBN: </label> <br /> {book.isbn ?? 'Unknown'}
+                          <label htmlFor="book.isbn" className="mx-2">ISBN: </label> <br /> {book.isbn ?? 'Unknown'}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
-                          <label className="mx-2">Number of Pages: </label> <br />
+                          <label  htmlFor="book.numberOfPages" className="mx-2">Number of Pages: </label> <br />
                           {book.numberOfPages ?? 'Unknown'}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
-                          <label className="mx-2">Publisher: </label> <br />
+                          <label  htmlFor="book.publisher" className="mx-2">Publisher: </label> <br />
                           {book.publisher ?? 'Unknown'}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
-                          <label className="mx-2">Country: </label> <br />
+                          <label  htmlFor="book.country" className="mx-2">Country: </label> <br />
                           {book.country ?? 'Unknown'}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
-                          <label className="mx-2">Media Type: </label> <br />
+                          <label  htmlFor="book.mediaType" className="mx-2">Media Type: </label> <br />
                           {book.mediaType ?? 'Unknown'}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-3 my-2">
                           <label className="mx-2">Released: </label> <br />
-                          {book.released ? FormatDate(book.released) : 'Unknown'}
+                          {book.released ? new Date(book.released).toDateString() : 'Unknown'}
                         </div>
                         <div className="col-xs-12 mb-2">
                           <label className="mx-2">Authors</label>
@@ -132,8 +125,8 @@ function Book({ book, history }) {
                       <h5>POV Characters</h5>
                       { isLoadingPOVCharacters ? (
                         <div className='col-12 text-center mt-4'>
-                        <div class="spinner-border text-light" role="status">
-                          <span class="visually-hidden">Loading...</span>
+                        <div className="spinner-border text-light" role="status">
+                          <span className="visually-hidden">Loading...</span>
                         </div>
                       </div>
                       ) : povCharactersFetch ? (
@@ -159,8 +152,8 @@ function Book({ book, history }) {
                       </div>
                       {isLoadingCharacters ? (
                         <div className='col-12 text-center mt-4'>
-                          <div class="spinner-border text-light" role="status">
-                            <span class="visually-hidden">Loading...</span>
+                          <div className="spinner-border text-light" role="status">
+                            <span className="visually-hidden">Loading...</span>
                           </div>
                         </div>
                       ) : charactersFetch ? (
