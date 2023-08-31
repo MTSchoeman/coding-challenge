@@ -20,8 +20,6 @@ export class AppComponent {
   
   selectedpage = "";
 
-
-
   ChangeLinkColor(event: Event) {
     const target = event.target as HTMLAnchorElement;
     switch (target.innerText) {

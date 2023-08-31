@@ -1,0 +1,113 @@
+@media screen and (max-width: 900px) {
+  .container-fluid {
+    margin-bottom: 10rem;
+  }
+}
+
+@media screen and (min-width: 901px) {
+  .container-fluid {
+    margin-bottom: 5rem;
+  }
+}
+
+.houseList.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.houseList.card-body {
+  flex: 1;
+}
+
+.houseList.card {
+  display: flex;
+  background-color: #17141d;
+  transition: 0.4s ease-out;
+  position: relative;
+}
+
+.houseList.card:hover~.houseList.card {
+  position: relative;
+  left: 50px;
+}
+
+.houseList.card-title {
+  color: #e8e8e8;
+}
+
+.houseList.card-header {
+  background-color: #8a231c;
+}
+
+.houseList.card .houseList.card-body {
+  background-color: #d2cdb0;
+  box-shadow: 1px -1px 3rem 0px rgba(0, 0, 0, 0.75) inset;
+  transition: all 1s;
+}
+
+.houseList.card:hover {
+  cursor: pointer;
+}
+
+.houseList.card:hover .houseList.card-body {
+  background-color: #d2cdb0;
+  box-shadow: 1px -1px 3rem 0px rgba(0, 0, 0, 0) inset;
+
+  cursor: pointer;
+}
+
+#sticky-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  padding: 1rem;
+  background-color: #21252957;
+}
+
+a.col-xs-12.col-sm-6.col-md-4.col-lg-3.my-2{
+  text-decoration: none;
+  color: inherit;
+}
+
+
+div.nav-container {
+  background-color: rgba(87, 86, 86, 0.026);
+  border-radius:  1rem;
+  box-shadow: inset 0px 0px 1rem 0px rgba(255, 255, 255, 0.197);
+  padding: 1rem;
+  backdrop-filter: blur(2rem)
+}
+nav > h1{
+  color: #cf3c32;
+}
+
+nav .form-label{
+  color: white;
+  font-weight:inherit;
+}
+
+input.house.form-control:focus{
+  box-shadow: none;
+  border: none;
+}
+
+select.house.form-select:focus{
+  box-shadow: none;
+  border: none;
+}
+
+input.house.form-control::placeholder, select.house.form-select::placeholder{
+  color: rgba(255, 255, 255, 0.658);
+}
+
+.form-select:focus, .form-select{
+  border: none;
+  box-shadow: none;
+}
+
+div.houseList.text-center.mt-4 > h1{
+  color: white;
+}
