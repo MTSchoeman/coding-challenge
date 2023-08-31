@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './App';
 import { CharacterProvider } from './context/CharacterContext';
 import { BookProvider } from './context/BookContext';
@@ -7,7 +7,7 @@ import { HouseProvider } from './context/HouseContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-createRoot(document.getElementById('root')).render(
+ReactDOM.render(
   <React.StrictMode>
     <CharacterProvider>
       <BookProvider>
@@ -16,5 +16,6 @@ createRoot(document.getElementById('root')).render(
         </HouseProvider>
       </BookProvider>
     </CharacterProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
