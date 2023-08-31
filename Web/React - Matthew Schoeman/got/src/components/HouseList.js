@@ -70,52 +70,52 @@ function HouseList() {
           <div className='row'>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="searchName">House Name</label>
-              <input className="house form-control bg-dark text-white" type="text" name="searchName" placeholder="Targaryen of King's Landing" value={searchName} onChange={(e) => setSearchName(e.target.value)} ></input>
+              <input id='searchName' className="house form-control bg-dark text-white" type="text" name="searchName" placeholder="Targaryen of King's Landing" value={searchName} onChange={(e) => setSearchName(e.target.value)} ></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor='searchRegion'>Region of House</label>
-              <input className="house form-control bg-dark text-white" type="text" name="searchRegion" placeholder="The Crownlands" value={searchRegion} onChange={(e) => setSearchRegion(e.target.value)}></input>
+              <input id='searchRegion' className="house form-control bg-dark text-white" type="text" name="searchRegion" placeholder="The Crownlands" value={searchRegion} onChange={(e) => setSearchRegion(e.target.value)}></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="searchWords">House Words</label>
-              <input className='house form-control bg-dark text-white' type="text" name="searchWords" placeholder="Fire and Blood" value={searchWords} onChange={(e) => setSearchWords(e.target.value)}></input>
+              <input id='searchWords' className='house form-control bg-dark text-white' type="text" name="searchWords" placeholder="Fire and Blood" value={searchWords} onChange={(e) => setSearchWords(e.target.value)}></input>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="hasDiedOut">Legacy</label>
-              <select className='house form-select bg-dark text-white' value={hasDiedOut} onChange={(e) => setHasDiedOut(e.target.value)}>
-                <option value="" selected></option>
+              <select id='hasDiedOut' className='house form-select bg-dark text-white' value={hasDiedOut} onChange={(e) => setHasDiedOut(e.target.value)}>
+                <option value="" defaultValue></option>
                 <option value="true">Continuing</option>
                 <option value="false">Extinct</option>
               </select>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="hasTitles">Titles</label>
-              <select className='house form-select bg-dark text-white' value={hasTitles} onChange={(e) => setHasTitles(e.target.value)}>
-                <option value="" selected></option>
+              <select id='hasTitles' className='house form-select bg-dark text-white' value={hasTitles} onChange={(e) => setHasTitles(e.target.value)}>
+                <option value="" defaultValue></option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="hasSeats">Seats</label>
-              <select className='house form-select bg-dark text-white' value={hasSeats} onChange={(e) => setHasSeats(e.target.value)}>
-                <option value="" selected></option>
+              <select id='hasSeats' className='house form-select bg-dark text-white' value={hasSeats} onChange={(e) => setHasSeats(e.target.value)}>
+                <option value="" defaultValue></option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
             <div className='col-6 col-sm-4 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="hasWords">Has House Words</label>
-              <select className='house form-select bg-dark text-white' value={hasWords} onChange={(e) => setHasWords(e.target.value)}>
-                <option value="" selected></option>
+              <select id='hasWords' className='house form-select bg-dark text-white' value={hasWords} onChange={(e) => setHasWords(e.target.value)}>
+                <option value="" defaultValue></option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
             </div>
             <div className='col-6 col-sm-5 col-md-4 col-lg-3 text-center'>
               <label className='form-label' htmlFor="hasAncestralWeapons">Ancestral Weapons</label>
-              <select className='house form-select bg-dark text-white' value={hasAncestralWeapons} onChange={(e) => setHasAncestralWeapons(e.target.value)}>
-                <option value="" selected></option>
+              <select id='hasAncestralWeapons' className='house form-select bg-dark text-white' value={hasAncestralWeapons} onChange={(e) => setHasAncestralWeapons(e.target.value)}>
+                <option value="" defaultValue></option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>
               </select>
@@ -125,7 +125,7 @@ function HouseList() {
                 <div className='col-4 col-sm-4 col-md-5'></div>
                 <div className='col-4 col-sm-4 col-md-2'>
                   <label className='form-label' htmlFor="houseListPageSize">Result Size</label>
-                  <input className="house form-control bg-dark text-white" type="text" name="houseListPageSize" placeholder="REsult Size (10)" min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
+                  <input id='houseListPageSize' className="house form-control bg-dark text-white" type="text" name="houseListPageSize" placeholder="REsult Size (10)" min="1" value={houseListPageSize} onChange={(e) => setHouseListPageSize(e.target.value)} ></input>
                 </div>
               </div>
               <div className='col-4 col-sm-4 col-md-5'></div>

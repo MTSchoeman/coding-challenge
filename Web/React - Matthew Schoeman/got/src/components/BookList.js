@@ -57,15 +57,15 @@ function BookList() {
           <div className='row'>
             <div className='col-6 col-sm-12 col-md text-center'>
               <label className='form-label' htmlFor="searchName">Name of Book</label>
-              <input className='book form-control bg-dark text-white' ype="text" name="searchName" placeholder="Search by Name" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
+              <input id='searchName' className='book form-control bg-dark text-white' ype="text" name="searchName" placeholder="Search by Name" value={searchName} onChange={(e) => setSearchName(e.target.value)} />
             </div>
             <div className='col-6 col-sm-6 col-md text-center'>
               <label className='form-label' htmlFor="fromReleaseDate">From Release Date:</label>
-              <input className='book form-control bg-dark text-white' type="date" name="fromReleaseDate" value={fromReleaseDate} onChange={(e) => setFromReleaseDate(e.target.value)} />
+              <input id='fromReleaseDate' className='book form-control bg-dark text-white' type="date" name="fromReleaseDate" value={fromReleaseDate} onChange={(e) => setFromReleaseDate(e.target.value)} />
             </div>
             <div className='col-6 col-sm-6 col-md text-center'>
               <label className='form-label' htmlFor="toReleaseDate">To Release Date:</label>
-              <input className='book form-control bg-dark text-white' type="date" name="toReleaseDate" value={toReleaseDate} onChange={(e) => setToReleaseDate(e.target.value)} />
+              <input id='toReleaseDate' className='book form-control bg-dark text-white' type="date" name="toReleaseDate" value={toReleaseDate} onChange={(e) => setToReleaseDate(e.target.value)} />
             </div>
           </div>
           <div className='col-12 text-center'>
@@ -74,7 +74,7 @@ function BookList() {
               <div className='col-4 col-sm-4 col-md-5'></div>
               <div className='col-4 col-sm-4 col-md-2'>
                 <label className='form-label' htmlFor="bookListPageSize">Result Size</label>
-                <input className='book form-control bg-dark text-white' type="text" name="bookListPageSize" placeholder="REsult Size (10)" min="1" value={bookListPageSize} onChange={(e) => setBookListPageSize(e.target.value)} ></input>
+                <input id='bookListPageSize' className='book form-control bg-dark text-white' type="text" name="bookListPageSize" placeholder="REsult Size (10)" min="1" value={bookListPageSize} onChange={(e) => setBookListPageSize(e.target.value)} ></input>
               </div>
             </div>
             <div className='col-4 col-sm-4 col-md-5'></div>
