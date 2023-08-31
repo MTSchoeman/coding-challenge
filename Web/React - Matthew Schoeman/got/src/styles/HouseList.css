@@ -102,7 +102,12 @@ select.house.form-select:focus{
 input.house.form-control::placeholder, select.house.form-select::placeholder{
   color: rgba(255, 255, 255, 0.658);
 }
+
 .form-select:focus, .form-select{
   border: none;
   box-shadow: none;
+}
+
+div.houseList.text-center.mt-4 > h1{
+  color: white;
 }

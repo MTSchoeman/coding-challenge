@@ -12,10 +12,10 @@ function BookList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [bookListPageSize, setBookListPageSize] = useState(10);
-
-  var showingSearchResults = false;
+  const [characterSearchBlankResults, setCharacterSearchBlankResults] = useState(false);
+  const [showingCharacterListSearchResults, setShowingCharacterListSearchResults] = useState(false);
   const handleSearch = async () => {
-    showingSearchResults = true;
+    setShowingCharacterListSearchResults(true);
     setSearching(true);
     const apiUrl = `https://anapioficeandfire.com/api/books?pageSize=${bookListPageSize}&name=${searchName}&fromReleaseDate=${fromReleaseDate}T00:00:00&toReleaseDate=${toReleaseDate}T00:00:00`;
 
@@ -26,9 +26,11 @@ function BookList() {
       if (data.length > 0) {
         setSearchResults(data);
       } else {
+        setCharacterSearchBlankResults(true);
         setSearchResults([]);
       }
     } catch (error) {
+      setCharacterSearchBlankResults(true);
       console.error(error);
     } finally {
       setSearching(false);
@@ -36,7 +38,8 @@ function BookList() {
   }
 
   const handleCancel = () => {
-    showingSearchResults = false;
+    setShowingCharacterListSearchResults(false);
+    setCharacterSearchBlankResults(false);
     setSearchName('');
     setFromReleaseDate('');
     setToReleaseDate('');
@@ -46,7 +49,7 @@ function BookList() {
   return (
     <div className='container-fluid'>
       <div id='sticky-container'>
-        {!searchResults[0] && !showingSearchResults && <Pagination componentName="book" />}
+        {!showingCharacterListSearchResults && <Pagination componentName="book" />}
       </div>
       <div className='book nav-container'>
         <nav className='container'>
@@ -77,30 +80,30 @@ function BookList() {
             <div className='col-4 col-sm-4 col-md-5'></div>
           </div>
           <div className='col-12 text-center'>
-              {searching ? (
-                <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
-                  Searching...
-                </button>
-              ) : (
-                <button className='btn btn-outline-light mx-1 mt-2' type="button" onClick={handleSearch} name="search">
-                  Search
-                </button>
-              )}
-              <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="clear">
-                Clear
+            {searching ? (
+              <button className='btn btn-outline-primary mx-1 mt-2' type="button" disabled>
+                Searching...
               </button>
-            </div>
+            ) : (
+              <button className='btn btn-outline-light mx-1 mt-2' type="button" onClick={handleSearch} name="search">
+                Search
+              </button>
+            )}
+            <button className='btn btn-outline-warning mx-1 mt-2' type="button" onClick={handleCancel} name="clear">
+              Clear
+            </button>
+          </div>
         </nav>
       </div>
 
       <div className="row">
-        {  bookListLoading?(
+        {bookListLoading ? (
           <div className='col-12 text-center mt-4'>
-          <div className="spinner-border text-light" role="status">
-            <span className="visually-hidden">Loading...</span>
+            <div className="spinner-border text-light" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
-        </div>
-        ):searchResults.length > 0 ? (
+        ) : searchResults.length > 0 ? (
           searchResults.map((book, index) => (
             <Link
               to={{
@@ -113,17 +116,26 @@ function BookList() {
             </Link>
           ))
         ) : (
-          books.map((book, index) => (
-            <Link
-              to={{
-                pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
-                state: { book: book },
-              }}
-              key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
-              <BookListCard book={book} />
-            </Link>
-          ))
+          <>
+            {characterSearchBlankResults ? (
+              <div className='houseList text-center mt-4'>
+                <h1>No matches found</h1>
+              </div>
+            ) : (
+
+              books.map((book, index) => (
+                <Link
+                  to={{
+                    pathname: `/books/${book.name === '' ? 'Nameless' : book.name}`,
+                    state: { book: book },
+                  }}
+                  key={index}
+                  className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+                  <BookListCard book={book} />
+                </Link>
+              ))
+            )}
+          </>
         )}
       </div>
     </div>

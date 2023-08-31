@@ -86,7 +86,12 @@ div.book.nav-container {
   input.book.form-control::placeholder, select.book.form-select::placeholder{
     color: rgba(255, 255, 255, 0.658);
   }
+  
   input.book.form-control:focus, select.book.form-select{
     border: none;
     box-shadow: none;
+  }
+
+  div.bookList.text-center.mt-4 > h1{
+    color: white;
   }

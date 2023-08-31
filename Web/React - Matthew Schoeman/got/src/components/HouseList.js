@@ -17,11 +17,10 @@ function HouseList() {
   const [searchResults, setSearchResults] = useState([]);
   const [searching, setSearching] = useState(false);
   const [houseListPageSize, setHouseListPageSize] = useState(10);
-
-  var showingSearchResults = false;
-
+  const [houseSearchBlankResults, setHouseSearchBlankResults] = useState(false);
+  const [showingHouseListSearchResults, setShowingHouseListSearchResults] = useState(false);
   const handleSearch = async () => {
-    showingSearchResults = true;
+    setShowingHouseListSearchResults(true);
     setSearching(true);
     let newSearchName = '';
     if (searchName !== '') {
@@ -35,9 +34,11 @@ function HouseList() {
       if (data.length > 0) {
         setSearchResults(data);
       } else {
+        setHouseSearchBlankResults(true);
         setSearchResults([]);
       }
     } catch (error) {
+      setHouseSearchBlankResults(true);
       console.error('Error fetching houses:', error);
     } finally {
       setSearching(false);
@@ -45,7 +46,8 @@ function HouseList() {
   };
 
   const handleCancel = () => {
-    showingSearchResults = false;
+    setShowingHouseListSearchResults(false)
+    setHouseSearchBlankResults(false);
     setSearchName('');
     setSearchRegion('');
     setSearchWords('');
@@ -56,24 +58,11 @@ function HouseList() {
     setHasAncestralWeapons('');
     setSearchResults([]);
   };
-
   return (
 
     <div className='container-fluid'>
-      <div className="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
-        <div className="toast-header">
-          <strong className="mr-auto">Toast Title</strong>
-          <small className="text-muted">Just now</small>
-          <button type="button" className="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div className="toast-body">
-          This is a Bootstrap toast that appears when the counter reaches 0.
-        </div>
-      </div>
       <div id='sticky-container'>
-        {!searchResults[0] && !showingSearchResults && <Pagination componentName="house" />}
+        {!showingHouseListSearchResults && <Pagination componentName="house" />}
       </div>
       <div className='nav-container'>
         <nav className='container'>
@@ -178,19 +167,29 @@ function HouseList() {
             </Link>
           ))
         ) : (
-          houses.map((house, index) => (
-            <Link
-              to={{
-                pathname: `/houses/${house.name === '' ? 'Nameless' : house.name}`,
-                state: { house: house },
-              }}
-              key={index}
-              className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
-              <HouseListCard house={house} />
-            </Link>
-          ))
+          <>
+            {houseSearchBlankResults ? (
+              <div className='houseList text-center mt-4'>
+                <h1>No matches found</h1>
+              </div>
+            ) : (
+
+              houses.map((house, index) => (
+                <Link
+                  to={{
+                    pathname: `/houses/${house.name === '' ? 'Nameless' : house.name}`,
+                    state: { house: house },
+                  }}
+                  key={index}
+                  className="col-xs-12 col-sm-6 col-md-4 col-lg-3 my-2">
+                  <HouseListCard house={house} />
+                </Link>
+              ))
+            )}
+          </>
         )}
       </div>
+
     </div>
   );
 }
