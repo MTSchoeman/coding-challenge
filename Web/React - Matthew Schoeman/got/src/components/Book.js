@@ -125,7 +125,7 @@ function Book({ book, history }) {
                       <h5>POV Characters</h5>
                       { isLoadingPOVCharacters ? (
                         <div className='col-12 text-center mt-4'>
-                        <div className="spinner-border text-light" role="status">
+                        <div className="book spinner-border spinner-border-lg" role="status">
                           <span className="visually-hidden">Loading...</span>
                         </div>
                       </div>
@@ -152,7 +152,7 @@ function Book({ book, history }) {
                       </div>
                       {isLoadingCharacters ? (
                         <div className='col-12 text-center mt-4'>
-                          <div className="spinner-border text-light" role="status">
+                          <div className="book spinner-border spinner-border-lg" role="status">
                             <span className="visually-hidden">Loading...</span>
                           </div>
                         </div>

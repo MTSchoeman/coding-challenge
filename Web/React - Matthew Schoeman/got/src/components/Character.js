@@ -159,7 +159,7 @@ function Character({ character, history }) {
                           <label className="mx-2">Mother:</label>
                           {isLoadingMother ? (
                             <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="character spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>
@@ -173,7 +173,7 @@ function Character({ character, history }) {
                           <label className="mx-2">Father:</label>
                           {isLoadingFather ? (
                             <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="character spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>
@@ -188,7 +188,7 @@ function Character({ character, history }) {
                           <label className="mx-2">Spouse:</label>
                           {isLoadingSpouse ? (
                             <div className='col-12 text-center mt-4'>
-                            <div className="spinner-border text-light" role="status">
+                            <div className="character spinner-border spinner-border-lg" role="status">
                               <span className="visually-hidden">Loading...</span>
                             </div>
                           </div>
@@ -254,7 +254,7 @@ function Character({ character, history }) {
                         <h4 className="text-center">Allegiances</h4>
                         { isLoadingAllegienaces ? (
                           <div className='col-12 text-center mt-4'>
-                          <div className="spinner-border text-light" role="status">
+                          <div className="character spinner-border spinner-border-lg" role="status">
                             <span className="visually-hidden">Loading...</span>
                           </div>
                         </div>
@@ -278,7 +278,7 @@ function Character({ character, history }) {
                           </div>
                           { isLoadingBooks ? (
                             <div className='col-12 text-center mt-4'>
-                            <div className="spinner-border text-light" role="status">
+                            <div className="character spinner-border spinner-border-lg" role="status">
                               <span className="visually-hidden">Loading...</span>
                             </div>
                           </div>
@@ -303,7 +303,7 @@ function Character({ character, history }) {
                           <h4 className="text-center">POV Books</h4>
                           {isLoadingPovBooks ? (
                             <div className='col-12 text-center mt-4'>
-                            <div className="spinner-border text-light" role="status">
+                            <div className="character spinner-border spinner-border-lg" role="status">
                               <span className="visually-hidden">Loading...</span>
                             </div>
                           </div>

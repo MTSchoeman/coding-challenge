@@ -14,6 +14,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function App() {
 
+  document.title = 'GOT | Houses';
   PageService.FetchData(10);
   return (
 

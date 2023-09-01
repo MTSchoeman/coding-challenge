@@ -1,13 +1,14 @@
 .character.card {
     border: none;
 }
+
 .character.card-body {
     display: flex;
     flex-wrap: wrap;
 }
 
 label {
-    font-size:x-large;
+    font-size: x-large;
     font-weight: bolder;
 }
 
@@ -30,6 +31,10 @@ label {
     box-shadow: -0px 0px 0.5rem 0px rgba(0, 0, 0, 0.281) inset;
 }
 
-h4{
+h4 {
     font-size: x-larger;
+}
+
+.character.spinner-border {
+    color: #525949;
 }

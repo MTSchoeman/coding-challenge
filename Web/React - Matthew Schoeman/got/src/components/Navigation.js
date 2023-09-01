@@ -7,6 +7,24 @@ function Navigation() {
 const [selectedPage, setSelectedPage] = useState('house');
 
   const changeLinkColor = (page) => {
+    switch(page){
+      case 'house':{
+        document.title = 'GOT | Houses';
+        break;
+      }
+
+      case 'character':{
+        document.title = 'GOT | Characters';
+        break;
+      }
+      case 'book' : {
+        document.title = 'GOT | Books';
+        break;
+      }
+      default :{
+        document.title = 'GOT | Houses';
+      }
+    }
     setSelectedPage(page);
   };
 
