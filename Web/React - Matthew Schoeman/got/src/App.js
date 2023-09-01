@@ -14,6 +14,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 function App() {
 
+  document.title = 'GOT | Houses';
   PageService.FetchData(10);
   return (
 
@@ -30,22 +31,22 @@ function App() {
         <div className='light x9'></div>
         <Navigation />
         <Switch>
-          <Route exact path="/houses" component={HouseList} />
+          <Route exact path="/Houses" component={HouseList} />
           <Route
-            path="/houses/:name"
+            exact path="/Houses/:name"
             render={(props) => <House house={props.location.state.house} />}
           />
-          <Route exact path="/characters" component={CharacterList} />
+          <Route exact path="/Characters" component={CharacterList} />
           <Route
-            path="/characters/:name"
+            path="/Characters/:name"
             render={(props) => <Character character={props.location.state.character} />}
           />
-          <Route exact path="/books" component={BookList} />
+          <Route exact path="/Books" component={BookList} />
           <Route
-            path="/books/:name"
+            path="/Books/:name"
             render={(props) => <Book book={props.location.state.book} />}
           />
-          <Redirect from="/" to="/houses" />
+          <Redirect from="/" to="/Houses" />
         </Switch>
       </div>
     </Router>

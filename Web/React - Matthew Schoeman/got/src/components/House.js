@@ -6,7 +6,6 @@ import CharacterSnip from './CharacterSnip';
 
 import '../styles/House.css'
 function House({ house, history }) {
-
   const [heirFetch, setHeirFetch] = useState(null);
   const [founderFetch, setFounderFetch] = useState(null);
   const [currentLordFetch, setCurrentLordFetch] = useState(null);
@@ -159,7 +158,7 @@ function House({ house, history }) {
                           <label>Heir: </label>
                           {isLoadingHeir ? (
                             <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="house spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>
@@ -173,7 +172,7 @@ function House({ house, history }) {
                           <label>Founder: </label>
                           {isLoadingFounder ? (
                             <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="house spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>
@@ -182,13 +181,13 @@ function House({ house, history }) {
 
                               <br /> <CharacterSnip character={founderFetch} />
                             </>
-                          )};
+                          )}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
                           <label>Current Lord: </label>
                           {isLoadingCurrentLord ? (
                             <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="house spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>
@@ -196,13 +195,13 @@ function House({ house, history }) {
                             <>
                               <br /> <CharacterSnip character={currentLordFetch} />
                             </>
-                          )};
+                          )}
                         </div>
                         <div className="col-xs-12 col-sm-6 col-md-6 col-lg-4 my-2">
                           <label>Overlord: </label>
                           {isLoadingOverLord ? (
                             <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="house spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>
@@ -246,7 +245,7 @@ function House({ house, history }) {
                         <h4 className="text-center">Cadet Branches</h4>
                         { isLoadingCadetBranches ? (
                           <div className='col-12 text-center mt-4'>
-                          <div className="spinner-border text-light" role="status">
+                          <div className="house spinner-border spinner-border-lg" role="status">
                             <span className="visually-hidden">Loading...</span>
                           </div>
                         </div>
@@ -291,7 +290,7 @@ function House({ house, history }) {
                           </div>
                           {  isLoadingSwornMembers ? (
                               <div className='col-12 text-center mt-4'>
-                              <div className="spinner-border text-light" role="status">
+                              <div className="house spinner-border spinner-border-lg" role="status">
                                 <span className="visually-hidden">Loading...</span>
                               </div>
                             </div>

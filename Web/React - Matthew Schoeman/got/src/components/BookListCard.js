@@ -25,9 +25,14 @@ function BookListCard({ book }) {
                         <h6>{book.authors[0] ? book.authors.join(', ') : 'Unknown'}</h6>
                     </div>
                     <div className="col-12">
-
-                        <h4>Released: </h4>
-                        <h6>{book.released ? new Date(book.released).toDateString() : 'Unknown'}</h6>
+                        <div className="row">
+                            <div className='col-auto'>
+                                <h5>Released: </h5>
+                            </div>
+                            <div  className='col-auto'>
+                                <h6>{book.released ? new Date(book.released).toDateString() : 'Unknown'}</h6>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

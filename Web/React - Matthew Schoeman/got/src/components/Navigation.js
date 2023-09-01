@@ -1,12 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Navigation.css'
 import { Navbar, Nav } from 'react-bootstrap';
 function Navigation() {
 
-const [selectedPage, setSelectedPage] = useState('house');
+  const [selectedPage, setSelectedPage] = useState('house');
 
   const changeLinkColor = (page) => {
+    switch (page) {
+      case 'house': {
+        document.title = 'GOT | Houses';
+        break;
+      }
+
+      case 'character': {
+        document.title = 'GOT | Characters';
+        break;
+      }
+      case 'book': {
+        document.title = 'GOT | Books';
+        break;
+      }
+      default: {
+        document.title = 'GOT | Houses';
+      }
+    }
     setSelectedPage(page);
   };
 
@@ -24,7 +42,7 @@ const [selectedPage, setSelectedPage] = useState('house');
         <Nav className="mr-auto">
           <Nav.Link
             as={Link}
-            to="Houses"
+            to="/Houses"
             onClick={() => changeLinkColor('house')}
             className={selectedPage === 'house' ? 'active' : ''}
           >
@@ -32,7 +50,7 @@ const [selectedPage, setSelectedPage] = useState('house');
           </Nav.Link>
           <Nav.Link
             as={Link}
-            to="Books"
+            to="/Books"
             onClick={() => changeLinkColor('book')}
             className={selectedPage === 'book' ? 'active' : ''}
           >
@@ -40,12 +58,13 @@ const [selectedPage, setSelectedPage] = useState('house');
           </Nav.Link>
           <Nav.Link
             as={Link}
-            to="Characters"
+            to="/Characters"
             onClick={() => changeLinkColor('character')}
             className={selectedPage === 'character' ? 'active' : ''}
           >
             Characters
           </Nav.Link>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>

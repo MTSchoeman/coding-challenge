@@ -27,6 +27,12 @@ function Book({ book, history }) {
             }
           })
           let charactersArray = await Promise.all(charactersPromises);
+          charactersArray.sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+    
           setCharactersFetch(charactersArray);
           setIsLoadingCharacters(false);
         }
@@ -125,7 +131,7 @@ function Book({ book, history }) {
                       <h5>POV Characters</h5>
                       { isLoadingPOVCharacters ? (
                         <div className='col-12 text-center mt-4'>
-                        <div className="spinner-border text-light" role="status">
+                        <div className="book spinner-border spinner-border-lg" role="status">
                           <span className="visually-hidden">Loading...</span>
                         </div>
                       </div>
@@ -152,7 +158,7 @@ function Book({ book, history }) {
                       </div>
                       {isLoadingCharacters ? (
                         <div className='col-12 text-center mt-4'>
-                          <div className="spinner-border text-light" role="status">
+                          <div className="book spinner-border spinner-border-lg" role="status">
                             <span className="visually-hidden">Loading...</span>
                           </div>
                         </div>
