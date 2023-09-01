@@ -27,6 +27,12 @@ function Book({ book, history }) {
             }
           })
           let charactersArray = await Promise.all(charactersPromises);
+          charactersArray.sort((a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        });
+    
           setCharactersFetch(charactersArray);
           setIsLoadingCharacters(false);
         }
