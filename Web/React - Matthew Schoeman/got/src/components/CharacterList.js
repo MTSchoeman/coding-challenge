@@ -85,7 +85,8 @@ function CharacterList() {
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
-            </div><div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
+            </div>
+            <div className='col-6 col-sm-4 col-md-4 col-lg text-center'>
               <label className='form-label' htmlFor="isAlive">Vital Status</label>
               <select id='isAlive' className='house form-select bg-dark text-white' value={isAlive} onChange={(e) => setIsAlive(e.target.value)}>
                 <option value="" defaultValue></option>

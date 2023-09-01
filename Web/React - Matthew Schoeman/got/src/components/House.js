@@ -6,7 +6,6 @@ import CharacterSnip from './CharacterSnip';
 
 import '../styles/House.css'
 function House({ house, history }) {
-
   const [heirFetch, setHeirFetch] = useState(null);
   const [founderFetch, setFounderFetch] = useState(null);
   const [currentLordFetch, setCurrentLordFetch] = useState(null);
