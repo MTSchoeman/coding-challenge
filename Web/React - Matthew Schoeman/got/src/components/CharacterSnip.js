@@ -5,7 +5,7 @@ function CharacterSnip({character}){
         <>
             {character ? (
                 <div>
-                    <p>{character.name} : {character.gender ? character.gender : 'Unknown gender'} -  {character.culture ? character.culture : 'Unknown culture' }</p>
+                    <p>{character.name === '' ? 'Nameless' : character.name } : {character.gender ? character.gender : 'Unknown gender'} -  {character.culture ? character.culture : 'Unknown culture' }</p>
                 </div>    
             ): (
                 <p>Unknown</p>
